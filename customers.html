@@ -1,0 +1,2590 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>العملاء - ALSHAMI System Designer</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Tahoma, sans-serif;
+        }
+
+
+        body {
+            background: #f1f5f9;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+
+        /* ==============================
+           الشريط العلوي
+        ============================== */
+
+        .topbar {
+
+            background: #0f172a;
+
+            color: white;
+
+            padding: 18px 25px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+
+        }
+
+
+        .logo {
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+        }
+
+
+        .logo span {
+
+            color: #38bdf8;
+
+        }
+
+
+        .back-btn {
+
+            background: #2563eb;
+
+            color: white;
+
+            border: none;
+
+            padding: 10px 18px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+        }
+
+
+        .back-btn:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        /* ==============================
+           المحتوى
+        ============================== */
+
+        .container {
+
+            padding: 25px;
+
+            max-width: 1400px;
+
+            margin: auto;
+
+        }
+
+
+        .page-title {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 25px;
+
+            flex-wrap: wrap;
+
+            gap: 15px;
+
+        }
+
+
+        .page-title h1 {
+
+            font-size: 28px;
+
+            color: #0f172a;
+
+        }
+
+
+        .page-title p {
+
+            color: #64748b;
+
+            margin-top: 5px;
+
+        }
+
+
+        .add-btn {
+
+            background: #16a34a;
+
+            color: white;
+
+            border: none;
+
+            padding: 12px 20px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+        }
+
+
+        .add-btn:hover {
+
+            background: #15803d;
+
+        }
+
+
+        /* ==============================
+           نموذج العميل
+        ============================== */
+
+        .form-card {
+
+            display: none;
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 12px;
+
+            margin-bottom: 20px;
+
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+        }
+
+
+        .form-card h2 {
+
+            color: #0f172a;
+
+            margin-bottom: 20px;
+
+            font-size: 22px;
+
+        }
+
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 18px;
+
+        }
+
+
+        .form-group {
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+
+        .form-group.full {
+
+            grid-column: 1 / -1;
+
+        }
+
+
+        .form-group label {
+
+            margin-bottom: 7px;
+
+            font-weight: bold;
+
+            color: #334155;
+
+            font-size: 14px;
+
+        }
+
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            outline: none;
+
+        }
+
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+
+            border-color: #2563eb;
+
+        }
+
+
+        .form-group textarea {
+
+            min-height: 90px;
+
+            resize: vertical;
+
+        }
+
+
+        .form-buttons {
+
+            margin-top: 20px;
+
+            display: flex;
+
+            gap: 10px;
+
+        }
+
+
+        .save-btn {
+
+            background: #16a34a;
+
+            color: white;
+
+            border: none;
+
+            padding: 11px 25px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+        }
+
+
+        .cancel-btn {
+
+            background: #64748b;
+
+            color: white;
+
+            border: none;
+
+            padding: 11px 25px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+        }
+
+
+        /* ==============================
+           البحث
+        ============================== */
+
+        .search-box {
+
+            background: white;
+
+            padding: 18px;
+
+            border-radius: 12px;
+
+            margin-bottom: 20px;
+
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+        }
+
+
+        .search-box input {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            outline: none;
+
+        }
+
+
+        .search-box input:focus {
+
+            border-color: #2563eb;
+
+        }
+
+
+        /* ==============================
+           إحصائيات العملاء
+        ============================== */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .stat-card {
+
+            background: white;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+        }
+
+
+        .stat-card h3 {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .stat-card .number {
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+            color: #0f172a;
+
+        }
+
+
+        /* ==============================
+           الجدول
+        ============================== */
+
+        .table-card {
+
+            background: white;
+
+            border-radius: 12px;
+
+            overflow-x: auto;
+
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 1050px;
+
+        }
+
+
+        th {
+
+            background: #e2e8f0;
+
+            color: #0f172a;
+
+            padding: 15px;
+
+            text-align: right;
+
+            font-size: 14px;
+
+        }
+
+
+        td {
+
+            padding: 14px 15px;
+
+            border-bottom: 1px solid #e2e8f0;
+
+            font-size: 14px;
+
+        }
+
+
+        tr:hover {
+
+            background: #f8fafc;
+
+        }
+
+
+        .customer-number {
+
+            font-weight: bold;
+
+            color: #2563eb;
+
+        }
+
+
+        .status {
+
+            display: inline-block;
+
+            padding: 5px 10px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            background: #dcfce7;
+
+            color: #166534;
+
+        }
+
+
+        .status.inactive {
+
+            background: #f1f5f9;
+
+            color: #475569;
+
+        }
+
+
+        .status.stopped {
+
+            background: #fee2e2;
+
+            color: #991b1b;
+
+        }
+
+
+        .actions {
+
+            display: flex;
+
+            gap: 6px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .edit-btn,
+        .delete-btn,
+        .details-btn {
+
+            border: none;
+
+            padding: 7px 10px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            color: white;
+
+            font-size: 12px;
+
+        }
+
+
+        .edit-btn {
+
+            background: #2563eb;
+
+        }
+
+
+        .delete-btn {
+
+            background: #dc2626;
+
+        }
+
+
+        .details-btn {
+
+            background: #7c3aed;
+
+        }
+
+
+        .edit-btn:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        .delete-btn:hover {
+
+            background: #b91c1c;
+
+        }
+
+
+        .details-btn:hover {
+
+            background: #6d28d9;
+
+        }
+
+
+        /* ==============================
+           نافذة التفاصيل
+        ============================== */
+
+        .modal {
+
+            display: none;
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background: rgba(15,23,42,0.65);
+
+            z-index: 1000;
+
+            padding: 20px;
+
+            overflow-y: auto;
+
+        }
+
+
+        .modal-content {
+
+            background: white;
+
+            max-width: 650px;
+
+            margin: 50px auto;
+
+            border-radius: 14px;
+
+            padding: 25px;
+
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+
+        }
+
+
+        .modal-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border-bottom: 1px solid #e2e8f0;
+
+            padding-bottom: 15px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .modal-header h2 {
+
+            color: #0f172a;
+
+            font-size: 22px;
+
+        }
+
+
+        .close-btn {
+
+            border: none;
+
+            background: #e2e8f0;
+
+            width: 35px;
+
+            height: 35px;
+
+            border-radius: 50%;
+
+            cursor: pointer;
+
+            font-size: 20px;
+
+            color: #334155;
+
+        }
+
+
+        .close-btn:hover {
+
+            background: #cbd5e1;
+
+        }
+
+
+        .details-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 15px;
+
+        }
+
+
+        .detail-item {
+
+            background: #f8fafc;
+
+            padding: 14px;
+
+            border-radius: 8px;
+
+        }
+
+
+        .detail-item.full {
+
+            grid-column: 1 / -1;
+
+        }
+
+
+        .detail-label {
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .detail-value {
+
+            color: #0f172a;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            word-break: break-word;
+
+        }
+
+
+        /* ==============================
+           الهاتف
+        ============================== */
+
+        @media (max-width: 700px) {
+
+            .topbar {
+
+                padding: 15px;
+
+            }
+
+
+            .logo {
+
+                font-size: 17px;
+
+            }
+
+
+            .container {
+
+                padding: 15px;
+
+            }
+
+
+            .page-title h1 {
+
+                font-size: 23px;
+
+            }
+
+
+            .add-btn {
+
+                width: 100%;
+
+            }
+
+
+            .form-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .form-group.full {
+
+                grid-column: auto;
+
+            }
+
+
+            .form-buttons {
+
+                flex-direction: column;
+
+            }
+
+
+            .save-btn,
+            .cancel-btn {
+
+                width: 100%;
+
+            }
+
+
+            .stats {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .details-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .detail-item.full {
+
+                grid-column: auto;
+
+            }
+
+
+            .modal {
+
+                padding: 10px;
+
+            }
+
+
+            .modal-content {
+
+                margin: 20px auto;
+
+                padding: 18px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==============================
+         الشريط العلوي
+    ============================== -->
+
+    <div class="topbar">
+
+
+        <div class="logo">
+
+            ALSHAMI
+
+            <span>
+                System Designer
+            </span>
+
+        </div>
+
+
+        <button
+            class="back-btn"
+            onclick="goDashboard()"
+        >
+
+            لوحة التحكم
+
+        </button>
+
+
+    </div>
+
+
+
+    <!-- ==============================
+         المحتوى
+    ============================== -->
+
+    <div class="container">
+
+
+        <div class="page-title">
+
+
+            <div>
+
+                <h1>
+                    إدارة العملاء
+                </h1>
+
+
+                <p>
+                    إدارة بيانات العملاء ومتابعة المشاريع
+                </p>
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="showCustomerForm()"
+            >
+
+                + إضافة عميل جديد
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- ==============================
+             الإحصائيات
+        ============================== -->
+
+        <div class="stats">
+
+
+            <div class="stat-card">
+
+                <h3>
+                    إجمالي العملاء
+                </h3>
+
+                <div
+                    class="number"
+                    id="totalCustomers"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>
+                    العملاء النشطون
+                </h3>
+
+                <div
+                    class="number"
+                    id="activeCustomers"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>
+                    الشركات
+                </h3>
+
+                <div
+                    class="number"
+                    id="companyCustomers"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ==============================
+             نموذج العميل
+        ============================== -->
+
+        <div
+            class="form-card"
+            id="customerForm"
+        >
+
+
+            <h2 id="formTitle">
+                إضافة عميل جديد
+            </h2>
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        اسم العميل *
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="customerName"
+                        placeholder="اكتب اسم العميل"
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        اسم الشركة
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="companyName"
+                        placeholder="اسم الشركة أو المؤسسة"
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        رقم الهاتف *
+                    </label>
+
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="مثال: 01000000000"
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        البريد الإلكتروني
+                    </label>
+
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="example@email.com"
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        نوع العميل
+                    </label>
+
+
+                    <select id="customerType">
+
+                        <option value="فرد">
+                            فرد
+                        </option>
+
+                        <option value="شركة">
+                            شركة
+                        </option>
+
+                        <option value="فندق">
+                            فندق
+                        </option>
+
+                        <option value="مؤسسة">
+                            مؤسسة
+                        </option>
+
+                        <option value="جهة حكومية">
+                            جهة حكومية
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        حالة العميل
+                    </label>
+
+
+                    <select id="customerStatus">
+
+                        <option value="نشط">
+                            نشط
+                        </option>
+
+                        <option value="غير نشط">
+                            غير نشط
+                        </option>
+
+                        <option value="متوقف">
+                            متوقف
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="form-group full">
+
+                    <label>
+                        العنوان
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="address"
+                        placeholder="عنوان العميل"
+                    >
+
+                </div>
+
+
+
+                <div class="form-group full">
+
+                    <label>
+                        ملاحظات
+                    </label>
+
+
+                    <textarea
+                        id="notes"
+                        placeholder="اكتب أي ملاحظات خاصة بالعميل..."
+                    ></textarea>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="form-buttons">
+
+
+                <button
+                    class="save-btn"
+                    id="saveButton"
+                    onclick="saveCustomer()"
+                >
+
+                    حفظ العميل
+
+                </button>
+
+
+                <button
+                    class="cancel-btn"
+                    onclick="cancelForm()"
+                >
+
+                    إلغاء
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ==============================
+             البحث
+        ============================== -->
+
+        <div class="search-box">
+
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="ابحث عن رقم العميل أو الاسم أو الشركة أو الهاتف..."
+                onkeyup="searchCustomers()"
+            >
+
+
+        </div>
+
+
+
+        <!-- ==============================
+             جدول العملاء
+        ============================== -->
+
+        <div class="table-card">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            رقم العميل
+                        </th>
+
+                        <th>
+                            اسم العميل
+                        </th>
+
+                        <th>
+                            الشركة
+                        </th>
+
+                        <th>
+                            الهاتف
+                        </th>
+
+                        <th>
+                            النوع
+                        </th>
+
+                        <th>
+                            الحالة
+                        </th>
+
+                        <th>
+                            الإجراءات
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="customersTable">
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ==============================
+         نافذة تفاصيل العميل
+    ============================== -->
+
+    <div
+        class="modal"
+        id="detailsModal"
+        onclick="closeModalOutside(event)"
+    >
+
+
+        <div
+            class="modal-content"
+            onclick="event.stopPropagation()"
+        >
+
+
+            <div class="modal-header">
+
+
+                <h2>
+                    تفاصيل العميل
+                </h2>
+
+
+                <button
+                    class="close-btn"
+                    onclick="closeDetails()"
+                >
+
+                    ×
+
+                </button>
+
+
+            </div>
+
+
+            <div
+                class="details-grid"
+                id="customerDetails"
+            >
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <script>
+
+
+        // ==========================================
+        // تحميل العملاء
+        // ==========================================
+
+        let customers = JSON.parse(
+
+            localStorage.getItem(
+                "alshamiCustomers"
+            )
+
+        ) || [];
+
+
+        // العميل الذي نقوم بتعديله
+
+        let editingCustomerId = null;
+
+
+
+        // ==========================================
+        // إنشاء أرقام العملاء القديمة
+        // ==========================================
+
+        function prepareCustomerNumbers() {
+
+
+            let changed = false;
+
+
+            customers.forEach(
+
+                function(customer, index) {
+
+
+                    if (!customer.customerNumber) {
+
+
+                        customer.customerNumber =
+                            "CUS-" +
+                            String(index + 1).padStart(4, "0");
+
+
+                        changed = true;
+
+                    }
+
+                }
+
+            );
+
+
+            if (changed) {
+
+                localStorage.setItem(
+
+                    "alshamiCustomers",
+
+                    JSON.stringify(customers)
+
+                );
+
+            }
+
+        }
+
+
+        prepareCustomerNumbers();
+
+
+
+        // ==========================================
+        // العودة إلى لوحة التحكم
+        // ==========================================
+
+        function goDashboard() {
+
+            window.location.href =
+                "dashboard.html";
+
+        }
+
+
+
+        // ==========================================
+        // إظهار نموذج الإضافة
+        // ==========================================
+
+        function showCustomerForm() {
+
+
+            editingCustomerId = null;
+
+
+            document.getElementById(
+                "formTitle"
+            ).textContent =
+                "إضافة عميل جديد";
+
+
+            document.getElementById(
+                "saveButton"
+            ).textContent =
+                "حفظ العميل";
+
+
+            clearForm();
+
+
+            document.getElementById(
+                "customerForm"
+            ).style.display =
+                "block";
+
+
+            document.getElementById(
+                "customerForm"
+            ).scrollIntoView({
+
+                behavior: "smooth"
+
+            });
+
+        }
+
+
+
+        // ==========================================
+        // إلغاء النموذج
+        // ==========================================
+
+        function cancelForm() {
+
+
+            editingCustomerId = null;
+
+
+            clearForm();
+
+
+            document.getElementById(
+                "customerForm"
+            ).style.display =
+                "none";
+
+
+            document.getElementById(
+                "formTitle"
+            ).textContent =
+                "إضافة عميل جديد";
+
+
+            document.getElementById(
+                "saveButton"
+            ).textContent =
+                "حفظ العميل";
+
+        }
+
+
+
+        // ==========================================
+        // حفظ أو تعديل العميل
+        // ==========================================
+
+        function saveCustomer() {
+
+
+            let name =
+                document.getElementById(
+                    "customerName"
+                ).value.trim();
+
+
+            let company =
+                document.getElementById(
+                    "companyName"
+                ).value.trim();
+
+
+            let phone =
+                document.getElementById(
+                    "phone"
+                ).value.trim();
+
+
+            let email =
+                document.getElementById(
+                    "email"
+                ).value.trim();
+
+
+            let type =
+                document.getElementById(
+                    "customerType"
+                ).value;
+
+
+            let status =
+                document.getElementById(
+                    "customerStatus"
+                ).value;
+
+
+            let address =
+                document.getElementById(
+                    "address"
+                ).value.trim();
+
+
+            let notes =
+                document.getElementById(
+                    "notes"
+                ).value.trim();
+
+
+
+            if (name === "") {
+
+                alert(
+                    "من فضلك اكتب اسم العميل."
+                );
+
+                return;
+
+            }
+
+
+
+            if (phone === "") {
+
+                alert(
+                    "من فضلك اكتب رقم الهاتف."
+                );
+
+                return;
+
+            }
+
+
+
+            // ======================================
+            // تعديل عميل
+            // ======================================
+
+            if (editingCustomerId !== null) {
+
+
+                let customer =
+                    customers.find(
+
+                        function(customer) {
+
+                            return customer.id ===
+                                editingCustomerId;
+
+                        }
+
+                    );
+
+
+                if (!customer) {
+
+                    alert(
+                        "لم يتم العثور على العميل."
+                    );
+
+                    return;
+
+                }
+
+
+                customer.name =
+                    name;
+
+
+                customer.company =
+                    company;
+
+
+                customer.phone =
+                    phone;
+
+
+                customer.email =
+                    email;
+
+
+                customer.type =
+                    type;
+
+
+                customer.status =
+                    status;
+
+
+                customer.address =
+                    address;
+
+
+                customer.notes =
+                    notes;
+
+
+                alert(
+                    "تم تعديل بيانات العميل بنجاح."
+                );
+
+            }
+
+
+            // ======================================
+            // إضافة عميل جديد
+            // ======================================
+
+            else {
+
+
+                let nextNumber =
+                    getNextCustomerNumber();
+
+
+                let customer = {
+
+
+                    id:
+                        Date.now(),
+
+
+                    customerNumber:
+                        nextNumber,
+
+
+                    name:
+                        name,
+
+
+                    company:
+                        company,
+
+
+                    phone:
+                        phone,
+
+
+                    email:
+                        email,
+
+
+                    type:
+                        type,
+
+
+                    status:
+                        status,
+
+
+                    address:
+                        address,
+
+
+                    notes:
+                        notes
+
+                };
+
+
+                customers.push(
+                    customer
+                );
+
+
+                alert(
+                    "تم حفظ العميل بنجاح."
+                );
+
+            }
+
+
+
+            // حفظ البيانات
+
+            localStorage.setItem(
+
+                "alshamiCustomers",
+
+                JSON.stringify(customers)
+
+            );
+
+
+
+            displayCustomers();
+
+
+            cancelForm();
+
+        }
+
+
+
+        // ==========================================
+        // إنشاء رقم العميل التالي
+        // ==========================================
+
+        function getNextCustomerNumber() {
+
+
+            let highestNumber = 0;
+
+
+            customers.forEach(
+
+                function(customer) {
+
+
+                    if (!customer.customerNumber) {
+
+                        return;
+
+                    }
+
+
+                    let number =
+                        parseInt(
+
+                            customer.customerNumber
+                                .replace("CUS-", "")
+
+                        );
+
+
+                    if (
+                        !isNaN(number) &&
+                        number > highestNumber
+                    ) {
+
+                        highestNumber = number;
+
+                    }
+
+                }
+
+            );
+
+
+            let nextNumber =
+                highestNumber + 1;
+
+
+            return (
+                "CUS-" +
+                String(nextNumber).padStart(4, "0")
+            );
+
+        }
+
+
+
+        // ==========================================
+        // عرض العملاء
+        // ==========================================
+
+        function displayCustomers() {
+
+
+            let table =
+                document.getElementById(
+                    "customersTable"
+                );
+
+
+            table.innerHTML = "";
+
+
+            if (customers.length === 0) {
+
+
+                table.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="7"
+                            style="text-align:center; padding:30px;"
+                        >
+
+                            لا يوجد عملاء حتى الآن
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+
+                updateStatistics();
+
+
+                return;
+
+            }
+
+
+
+            customers.forEach(
+
+                function(customer) {
+
+
+                    let row =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    let statusClass = "";
+
+
+                    if (
+                        customer.status ===
+                        "غير نشط"
+                    ) {
+
+                        statusClass =
+                            "inactive";
+
+                    }
+
+
+                    if (
+                        customer.status ===
+                        "متوقف"
+                    ) {
+
+                        statusClass =
+                            "stopped";
+
+                    }
+
+
+
+                    row.innerHTML = `
+
+
+                        <td>
+
+                            <span
+                                class="customer-number"
+                            >
+
+                                ${customer.customerNumber || "-"}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            ${customer.name}
+                        </td>
+
+
+                        <td>
+                            ${customer.company || "-"}
+                        </td>
+
+
+                        <td>
+                            ${customer.phone}
+                        </td>
+
+
+                        <td>
+                            ${customer.type || "-"}
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="status ${statusClass}"
+                            >
+
+                                ${customer.status}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+
+                            <div class="actions">
+
+
+                                <button
+                                    class="details-btn"
+                                    onclick="showDetails(${customer.id})"
+                                >
+
+                                    تفاصيل
+
+                                </button>
+
+
+                                <button
+                                    class="edit-btn"
+                                    onclick="editCustomer(${customer.id})"
+                                >
+
+                                    تعديل
+
+                                </button>
+
+
+                                <button
+                                    class="delete-btn"
+                                    onclick="deleteCustomer(${customer.id})"
+                                >
+
+                                    حذف
+
+                                </button>
+
+
+                            </div>
+
+
+                        </td>
+
+                    `;
+
+
+                    table.appendChild(
+                        row
+                    );
+
+
+                }
+
+            );
+
+
+            updateStatistics();
+
+        }
+
+
+
+        // ==========================================
+        // الإحصائيات
+        // ==========================================
+
+        function updateStatistics() {
+
+
+            let total =
+                customers.length;
+
+
+            let active =
+                customers.filter(
+
+                    function(customer) {
+
+                        return customer.status ===
+                            "نشط";
+
+                    }
+
+                ).length;
+
+
+            let companies =
+                customers.filter(
+
+                    function(customer) {
+
+                        return customer.type ===
+                            "شركة";
+
+                    }
+
+                ).length;
+
+
+
+            document.getElementById(
+                "totalCustomers"
+            ).textContent =
+                total;
+
+
+            document.getElementById(
+                "activeCustomers"
+            ).textContent =
+                active;
+
+
+            document.getElementById(
+                "companyCustomers"
+            ).textContent =
+                companies;
+
+        }
+
+
+
+        // ==========================================
+        // عرض تفاصيل العميل
+        // ==========================================
+
+        function showDetails(id) {
+
+
+            let customer =
+                customers.find(
+
+                    function(customer) {
+
+                        return customer.id === id;
+
+                    }
+
+                );
+
+
+            if (!customer) {
+
+                alert(
+                    "لم يتم العثور على العميل."
+                );
+
+                return;
+
+            }
+
+
+
+            let details =
+                document.getElementById(
+                    "customerDetails"
+                );
+
+
+            details.innerHTML = `
+
+
+                <div class="detail-item">
+
+                    <div class="detail-label">
+                        رقم العميل
+                    </div>
+
+                    <div class="detail-value">
+                        ${customer.customerNumber || "-"}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <div class="detail-label">
+                        اسم العميل
+                    </div>
+
+                    <div class="detail-value">
+                        ${customer.name || "-"}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <div class="detail-label">
+                        اسم الشركة
+                    </div>
+
+                    <div class="detail-value">
+                        ${customer.company || "-"}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <div class="detail-label">
+                        رقم الهاتف
+                    </div>
+
+                    <div class="detail-value">
+                        ${customer.phone || "-"}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <div class="detail-label">
+                        البريد الإلكتروني
+                    </div>
+
+                    <div class="detail-value">
+                        ${customer.email || "-"}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <div class="detail-label">
+                        نوع العميل
+                    </div>
+
+                    <div class="detail-value">
+                        ${customer.type || "-"}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <div class="detail-label">
+                        الحالة
+                    </div>
+
+                    <div class="detail-value">
+                        ${customer.status || "-"}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item full">
+
+                    <div class="detail-label">
+                        العنوان
+                    </div>
+
+                    <div class="detail-value">
+                        ${customer.address || "-"}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item full">
+
+                    <div class="detail-label">
+                        الملاحظات
+                    </div>
+
+                    <div class="detail-value">
+                        ${customer.notes || "-"}
+                    </div>
+
+                </div>
+
+            `;
+
+
+            document.getElementById(
+                "detailsModal"
+            ).style.display =
+                "block";
+
+        }
+
+
+
+        // ==========================================
+        // إغلاق التفاصيل
+        // ==========================================
+
+        function closeDetails() {
+
+
+            document.getElementById(
+                "detailsModal"
+            ).style.display =
+                "none";
+
+        }
+
+
+
+        // ==========================================
+        // إغلاق عند الضغط خارج النافذة
+        // ==========================================
+
+        function closeModalOutside(event) {
+
+
+            if (
+                event.target.id ===
+                "detailsModal"
+            ) {
+
+                closeDetails();
+
+            }
+
+        }
+
+
+
+        // ==========================================
+        // تعديل العميل
+        // ==========================================
+
+        function editCustomer(id) {
+
+
+            let customer =
+                customers.find(
+
+                    function(customer) {
+
+                        return customer.id === id;
+
+                    }
+
+                );
+
+
+            if (!customer) {
+
+                alert(
+                    "لم يتم العثور على العميل."
+                );
+
+                return;
+
+            }
+
+
+
+            editingCustomerId =
+                id;
+
+
+
+            document.getElementById(
+                "formTitle"
+            ).textContent =
+                "تعديل بيانات العميل";
+
+
+            document.getElementById(
+                "saveButton"
+            ).textContent =
+                "حفظ التعديل";
+
+
+
+            document.getElementById(
+                "customerName"
+            ).value =
+                customer.name || "";
+
+
+            document.getElementById(
+                "companyName"
+            ).value =
+                customer.company || "";
+
+
+            document.getElementById(
+                "phone"
+            ).value =
+                customer.phone || "";
+
+
+            document.getElementById(
+                "email"
+            ).value =
+                customer.email || "";
+
+
+            document.getElementById(
+                "customerType"
+            ).value =
+                customer.type || "فرد";
+
+
+            document.getElementById(
+                "customerStatus"
+            ).value =
+                customer.status || "نشط";
+
+
+            document.getElementById(
+                "address"
+            ).value =
+                customer.address || "";
+
+
+            document.getElementById(
+                "notes"
+            ).value =
+                customer.notes || "";
+
+
+
+            document.getElementById(
+                "customerForm"
+            ).style.display =
+                "block";
+
+
+
+            document.getElementById(
+                "customerForm"
+            ).scrollIntoView({
+
+                behavior: "smooth"
+
+            });
+
+        }
+
+
+
+        // ==========================================
+        // حذف العميل
+        // ==========================================
+
+        function deleteCustomer(id) {
+
+
+            let customer =
+                customers.find(
+
+                    function(customer) {
+
+                        return customer.id === id;
+
+                    }
+
+                );
+
+
+            if (!customer) {
+
+                return;
+
+            }
+
+
+            let confirmDelete =
+                confirm(
+
+                    "هل أنت متأكد من حذف العميل:\n\n" +
+                    customer.name +
+                    "\n" +
+                    (customer.customerNumber || "")
+
+                );
+
+
+            if (!confirmDelete) {
+
+                return;
+
+            }
+
+
+
+            customers =
+                customers.filter(
+
+                    function(customer) {
+
+                        return customer.id !== id;
+
+                    }
+
+                );
+
+
+
+            localStorage.setItem(
+
+                "alshamiCustomers",
+
+                JSON.stringify(customers)
+
+            );
+
+
+
+            displayCustomers();
+
+
+            alert(
+                "تم حذف العميل."
+            );
+
+        }
+
+
+
+        // ==========================================
+        // تنظيف النموذج
+        // ==========================================
+
+        function clearForm() {
+
+
+            document.getElementById(
+                "customerName"
+            ).value = "";
+
+
+            document.getElementById(
+                "companyName"
+            ).value = "";
+
+
+            document.getElementById(
+                "phone"
+            ).value = "";
+
+
+            document.getElementById(
+                "email"
+            ).value = "";
+
+
+            document.getElementById(
+                "customerType"
+            ).value = "فرد";
+
+
+            document.getElementById(
+                "customerStatus"
+            ).value = "نشط";
+
+
+            document.getElementById(
+                "address"
+            ).value = "";
+
+
+            document.getElementById(
+                "notes"
+            ).value = "";
+
+        }
+
+
+
+        // ==========================================
+        // البحث
+        // ==========================================
+
+        function searchCustomers() {
+
+
+            let input =
+                document.getElementById(
+                    "searchInput"
+                );
+
+
+            let filter =
+                input.value.toLowerCase();
+
+
+
+            let rows =
+                document
+                    .getElementById(
+                        "customersTable"
+                    )
+                    .getElementsByTagName(
+                        "tr"
+                    );
+
+
+
+            for (
+
+                let i = 0;
+
+                i < rows.length;
+
+                i++
+
+            ) {
+
+
+                let text =
+                    rows[i]
+                        .textContent
+                        .toLowerCase();
+
+
+                if (
+                    text.includes(filter)
+                ) {
+
+                    rows[i].style.display =
+                        "";
+
+                }
+
+                else {
+
+                    rows[i].style.display =
+                        "none";
+
+                }
+
+            }
+
+        }
+
+
+
+        // ==========================================
+        // تشغيل الصفحة
+        // ==========================================
+
+        displayCustomers();
+
+
+    </script>
+
+
+</body>
+
+</html>

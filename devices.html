@@ -1,0 +1,1480 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport"
+content="width=device-width, initial-scale=1">
+
+<title>
+الأجهزة والأسعار - ALSHAMI System Designer
+</title><style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Tahoma, sans-serif;
+}
+
+body {
+    background: #f1f5f9;
+    color: #1e293b;
+    min-height: 100vh;
+}
+
+.topbar {
+    background: #0f172a;
+    color: white;
+    padding: 18px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.15);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #38bdf8;
+}
+
+.back-btn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.container {
+    padding: 25px;
+    max-width: 1500px;
+    margin: auto;
+}
+
+.page-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.page-title h1 {
+    font-size: 28px;
+    color: #0f172a;
+}
+
+.page-title p {
+    color: #64748b;
+    margin-top: 5px;
+}
+
+.add-btn {
+    background: #16a34a;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns:
+        repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.08);
+}
+
+.stat-card h3 {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.stat-number {
+    font-size: 28px;
+    font-weight: bold;
+    color: #0f172a;
+}
+
+.form-card {
+    display: none;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.08);
+}
+
+.form-card h2 {
+    margin-bottom: 20px;
+    color: #0f172a;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(3, 1fr);
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+label {
+    margin-bottom: 7px;
+    font-weight: bold;
+    color: #334155;
+    font-size: 14px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border:
+        1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    background: white;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #2563eb;
+}
+
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.save-btn {
+    background: #16a34a;
+    color: white;
+    border: none;
+    padding: 11px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.cancel-btn {
+    background: #64748b;
+    color: white;
+    border: none;
+    padding: 11px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.search-box {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.08);
+}
+
+.table-card {
+    background: white;
+    border-radius: 12px;
+    overflow-x: auto;
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.08);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1100px;
+}
+
+th {
+    background: #e2e8f0;
+    padding: 15px;
+    text-align: right;
+    color: #0f172a;
+}
+
+td {
+    padding: 14px 15px;
+    border-bottom:
+        1px solid #e2e8f0;
+}
+
+.device-name {
+    color: #2563eb;
+    font-weight: bold;
+}
+
+.system-badge {
+    display: inline-block;
+    background: #ede9fe;
+    color: #6d28d9;
+    padding: 5px 9px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.price {
+    font-weight: bold;
+    color: #16a34a;
+}
+
+.purchase-price {
+    color: #64748b;
+}
+
+.actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.edit-btn,
+.delete-btn {
+    border: none;
+    padding: 7px 12px;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.edit-btn {
+    background: #2563eb;
+}
+
+.delete-btn {
+    background: #dc2626;
+}
+
+.info-box {
+    background: #eff6ff;
+    border:
+        1px solid #bfdbfe;
+    color: #1e40af;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+
+    .form-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: auto;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .save-btn,
+    .cancel-btn {
+        width: 100%;
+    }
+
+    .add-btn {
+        width: 100%;
+    }
+
+}
+
+</style></head><body><div class="topbar"><div class="logo">
+
+    ALSHAMI
+
+    <span>
+        System Designer
+    </span>
+
+</div>
+
+
+<button
+    class="back-btn"
+    onclick="goDashboard()">
+
+    لوحة التحكم
+
+</button>
+
+</div><div class="container"><div class="page-title"><div>
+
+    <h1>
+        الأجهزة والأسعار
+    </h1>
+
+    <p>
+        قاعدة بيانات الأجهزة والخدمات والأسعار المستخدمة في تصميم المشاريع
+    </p>
+
+</div>
+
+
+<button
+    class="add-btn"
+    onclick="showForm()">
+
+    + إضافة جهاز
+
+</button>
+
+</div><div class="info-box"><strong>
+    ملاحظة:
+</strong>
+
+سعر البيع الموجود هنا هو السعر الافتراضي الذي ستستخدمه صفحات تصميم الأنظمة تلقائيًا.
+ويمكن تعديل السعر يدويًا عند إعداد المشروع أو عرض السعر.
+
+</div><div class="stats"><div class="stat-card">
+
+    <h3>
+        إجمالي الأجهزة
+    </h3>
+
+    <div
+        class="stat-number"
+        id="totalDevices">
+
+        0
+
+    </div>
+
+</div>
+
+
+<div class="stat-card">
+
+    <h3>
+        الأنظمة المستخدمة
+    </h3>
+
+    <div
+        class="stat-number"
+        id="systemsCount">
+
+        0
+
+    </div>
+
+</div>
+
+
+<div class="stat-card">
+
+    <h3>
+        متوسط سعر البيع
+    </h3>
+
+    <div
+        class="stat-number"
+        id="averagePrice">
+
+        0
+
+    </div>
+
+</div>
+
+</div><div
+    class="form-card"
+    id="deviceForm"><h2 id="formTitle">
+    إضافة جهاز جديد
+</h2>
+
+
+<div class="form-grid">
+
+
+    <div class="form-group">
+
+        <label>
+            النظام *
+        </label>
+
+        <select id="deviceSystem">
+
+            <option value="">
+                اختر النظام
+            </option>
+
+            <option value="CCTV">
+                CCTV
+            </option>
+
+            <option value="Network">
+                Network
+            </option>
+
+            <option value="WiFi">
+                WiFi
+            </option>
+
+            <option value="Fire Alarm">
+                Fire Alarm
+            </option>
+
+            <option value="IPTV">
+                IPTV
+            </option>
+
+            <option value="Sound System">
+                Sound System
+            </option>
+
+            <option value="PABX / Telephone">
+                PABX / Telephone
+            </option>
+
+            <option value="Queue Management">
+                Queue Management
+            </option>
+
+            <option value="Outdoor LED Screens">
+                Outdoor LED Screens
+            </option>
+
+            <option value="Accounting Software">
+                Accounting Software
+            </option>
+
+            <option value="Patient Calling System">
+                Patient Calling System
+            </option>
+
+            <option value="Access Control">
+                Access Control
+            </option>
+
+            <option value="Time Attendance">
+                Time Attendance
+            </option>
+
+            <option value="Installation & Services">
+                Installation & Services
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            اسم الجهاز / الصنف *
+        </label>
+
+        <input
+            type="text"
+            id="deviceName"
+            placeholder="مثال: كاميرا IP 5MP">
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            الماركة
+        </label>
+
+        <input
+            type="text"
+            id="deviceBrand"
+            placeholder="مثال: Hikvision">
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            الموديل
+        </label>
+
+        <input
+            type="text"
+            id="deviceModel"
+            placeholder="رقم الموديل">
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            الوحدة *
+        </label>
+
+        <select id="deviceUnit">
+
+            <option value="قطعة">
+                قطعة
+            </option>
+
+            <option value="جهاز">
+                جهاز
+            </option>
+
+            <option value="متر">
+                متر
+            </option>
+
+            <option value="لفة">
+                لفة
+            </option>
+
+            <option value="بوابة">
+                بوابة
+            </option>
+
+            <option value="باب">
+                باب
+            </option>
+
+            <option value="شاشة">
+                شاشة
+            </option>
+
+            <option value="رخصة">
+                رخصة
+            </option>
+
+            <option value="خدمة">
+                خدمة
+            </option>
+
+            <option value="نقطة">
+                نقطة
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            سعر الشراء
+        </label>
+
+        <input
+            type="number"
+            id="purchasePrice"
+            min="0"
+            step="0.01"
+            value="0">
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            سعر البيع *
+        </label>
+
+        <input
+            type="number"
+            id="sellingPrice"
+            min="0"
+            step="0.01"
+            placeholder="0">
+
+    </div>
+
+
+    <div class="form-group full">
+
+        <label>
+            ملاحظات
+        </label>
+
+        <textarea
+            id="deviceNotes"
+            placeholder="مواصفات أو ملاحظات الجهاز..."></textarea>
+
+    </div>
+
+
+</div>
+
+
+<div class="buttons">
+
+
+    <button
+        class="save-btn"
+        id="saveBtn"
+        onclick="saveDevice()">
+
+        حفظ الجهاز
+
+    </button>
+
+
+    <button
+        class="cancel-btn"
+        onclick="cancelForm()">
+
+        إلغاء
+
+    </button>
+
+
+</div>
+
+</div><div class="search-box"><input
+    type="text"
+    id="searchInput"
+    placeholder="ابحث باسم الجهاز أو الماركة أو الموديل أو النظام..."
+    oninput="displayDevices()">
+
+</div><div class="table-card"><table><thead><tr><th>
+    #
+</th>
+
+<th>
+    النظام
+</th>
+
+<th>
+    الجهاز / الصنف
+</th>
+
+<th>
+    الماركة
+</th>
+
+<th>
+    الموديل
+</th>
+
+<th>
+    الوحدة
+</th>
+
+<th>
+    سعر الشراء
+</th>
+
+<th>
+    سعر البيع
+</th>
+
+<th>
+    الإجراءات
+</th>
+
+</tr></thead><tbody
+    id="devicesTable"></tbody></table></div></div><script>
+
+
+let devices =
+    JSON.parse(
+        localStorage.getItem(
+            "alshamiDevices"
+        )
+    ) || [];
+
+
+let editingDeviceId = null;
+
+
+
+function goDashboard() {
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
+
+
+function showForm() {
+
+    editingDeviceId = null;
+
+    clearForm();
+
+    document.getElementById(
+        "formTitle"
+    ).textContent =
+        "إضافة جهاز جديد";
+
+    document.getElementById(
+        "saveBtn"
+    ).textContent =
+        "حفظ الجهاز";
+
+    document.getElementById(
+        "deviceForm"
+    ).style.display =
+        "block";
+
+    document.getElementById(
+        "deviceForm"
+    ).scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+
+
+function cancelForm() {
+
+    editingDeviceId = null;
+
+    clearForm();
+
+    document.getElementById(
+        "deviceForm"
+    ).style.display =
+        "none";
+
+}
+
+
+
+function clearForm() {
+
+    document.getElementById(
+        "deviceSystem"
+    ).value = "";
+
+    document.getElementById(
+        "deviceName"
+    ).value = "";
+
+    document.getElementById(
+        "deviceBrand"
+    ).value = "";
+
+    document.getElementById(
+        "deviceModel"
+    ).value = "";
+
+    document.getElementById(
+        "deviceUnit"
+    ).value = "قطعة";
+
+    document.getElementById(
+        "purchasePrice"
+    ).value = "0";
+
+    document.getElementById(
+        "sellingPrice"
+    ).value = "";
+
+    document.getElementById(
+        "deviceNotes"
+    ).value = "";
+
+}
+
+
+
+function saveDevice() {
+
+
+    let system =
+        document.getElementById(
+            "deviceSystem"
+        ).value;
+
+
+    let name =
+        document.getElementById(
+            "deviceName"
+        ).value.trim();
+
+
+    let brand =
+        document.getElementById(
+            "deviceBrand"
+        ).value.trim();
+
+
+    let model =
+        document.getElementById(
+            "deviceModel"
+        ).value.trim();
+
+
+    let unit =
+        document.getElementById(
+            "deviceUnit"
+        ).value;
+
+
+    let purchasePrice =
+        parseFloat(
+            document.getElementById(
+                "purchasePrice"
+            ).value
+        ) || 0;
+
+
+    let sellingPrice =
+        parseFloat(
+            document.getElementById(
+                "sellingPrice"
+            ).value
+        );
+
+
+    let notes =
+        document.getElementById(
+            "deviceNotes"
+        ).value.trim();
+
+
+
+    if (!system) {
+
+        alert(
+            "من فضلك اختر النظام."
+        );
+
+        return;
+
+    }
+
+
+    if (!name) {
+
+        alert(
+            "من فضلك اكتب اسم الجهاز أو الصنف."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        isNaN(sellingPrice) ||
+        sellingPrice < 0
+    ) {
+
+        alert(
+            "من فضلك أدخل سعر البيع."
+        );
+
+        return;
+
+    }
+
+
+
+    if (editingDeviceId !== null) {
+
+
+        let device =
+            devices.find(function(item) {
+
+                return item.id ===
+                    editingDeviceId;
+
+            });
+
+
+        if (!device) {
+
+            alert(
+                "لم يتم العثور على الجهاز."
+            );
+
+            return;
+
+        }
+
+
+        device.system =
+            system;
+
+        device.name =
+            name;
+
+        device.brand =
+            brand;
+
+        device.model =
+            model;
+
+        device.unit =
+            unit;
+
+        device.purchasePrice =
+            purchasePrice;
+
+        device.sellingPrice =
+            sellingPrice;
+
+        device.notes =
+            notes;
+
+
+        alert(
+            "تم تعديل الجهاز وحفظ التعديل بنجاح."
+        );
+
+
+    } else {
+
+
+        let device = {
+
+            id:
+                Date.now(),
+
+            system:
+                system,
+
+            name:
+                name,
+
+            brand:
+                brand,
+
+            model:
+                model,
+
+            unit:
+                unit,
+
+            purchasePrice:
+                purchasePrice,
+
+            sellingPrice:
+                sellingPrice,
+
+            notes:
+                notes
+
+        };
+
+
+        devices.push(
+            device
+        );
+
+
+        alert(
+            "تم إضافة الجهاز بنجاح."
+        );
+
+    }
+
+
+    saveDevices();
+
+    displayDevices();
+
+    cancelForm();
+
+}
+
+
+
+function editDevice(id) {
+
+
+    let device =
+        devices.find(function(item) {
+
+            return item.id === id;
+
+        });
+
+
+    if (!device) {
+        return;
+    }
+
+
+    editingDeviceId =
+        id;
+
+
+    document.getElementById(
+        "formTitle"
+    ).textContent =
+        "تعديل الجهاز";
+
+
+    document.getElementById(
+        "saveBtn"
+    ).textContent =
+        "حفظ التعديل";
+
+
+    document.getElementById(
+        "deviceSystem"
+    ).value =
+        device.system;
+
+
+    document.getElementById(
+        "deviceName"
+    ).value =
+        device.name;
+
+
+    document.getElementById(
+        "deviceBrand"
+    ).value =
+        device.brand || "";
+
+
+    document.getElementById(
+        "deviceModel"
+    ).value =
+        device.model || "";
+
+
+    document.getElementById(
+        "deviceUnit"
+    ).value =
+        device.unit || "قطعة";
+
+
+    document.getElementById(
+        "purchasePrice"
+    ).value =
+        device.purchasePrice || 0;
+
+
+    document.getElementById(
+        "sellingPrice"
+    ).value =
+        device.sellingPrice;
+
+
+    document.getElementById(
+        "deviceNotes"
+    ).value =
+        device.notes || "";
+
+
+    document.getElementById(
+        "deviceForm"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "deviceForm"
+    ).scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+
+
+function deleteDevice(id) {
+
+
+    let device =
+        devices.find(function(item) {
+
+            return item.id === id;
+
+        });
+
+
+    if (!device) {
+        return;
+    }
+
+
+    let answer =
+        confirm(
+
+            "هل أنت متأكد من حذف هذا الجهاز؟\n\n" +
+
+            device.name
+
+        );
+
+
+    if (!answer) {
+        return;
+    }
+
+
+    devices =
+        devices.filter(function(item) {
+
+            return item.id !== id;
+
+        });
+
+
+    saveDevices();
+
+    displayDevices();
+
+
+    alert(
+        "تم حذف الجهاز."
+    );
+
+}
+
+
+
+function displayDevices() {
+
+
+    let table =
+        document.getElementById(
+            "devicesTable"
+        );
+
+
+    let search =
+        document.getElementById(
+            "searchInput"
+        ).value
+        .trim()
+        .toLowerCase();
+
+
+    table.innerHTML = "";
+
+
+    let filtered =
+        devices.filter(function(device) {
+
+            let text =
+                (
+                    device.system +
+                    " " +
+                    device.name +
+                    " " +
+                    device.brand +
+                    " " +
+                    device.model
+                ).toLowerCase();
+
+            return text.includes(search);
+
+        });
+
+
+    if (filtered.length === 0) {
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="9"
+                    style="
+                        text-align:center;
+                        padding:30px;
+                    ">
+
+                    لا توجد أجهزة مطابقة
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+
+    filtered.forEach(
+        function(device, index) {
+
+
+            let row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+
+                    <span class="system-badge">
+
+                        ${escapeHtml(
+                            device.system
+                        )}
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <span class="device-name">
+
+                        ${escapeHtml(
+                            device.name
+                        )}
+
+                    </span>
+
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        device.brand || "-"
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        device.model || "-"
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        device.unit || "-"
+                    )}
+                </td>
+
+                <td>
+
+                    <span class="purchase-price">
+
+                        ${formatNumber(
+                            device.purchasePrice || 0
+                        )}
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <span class="price">
+
+                        ${formatNumber(
+                            device.sellingPrice
+                        )}
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <div class="actions">
+
+                        <button
+                            class="edit-btn"
+                            onclick="editDevice(
+                                ${device.id}
+                            )">
+
+                            تعديل
+
+                        </button>
+
+
+                        <button
+                            class="delete-btn"
+                            onclick="deleteDevice(
+                                ${device.id}
+                            )">
+
+                            حذف
+
+                        </button>
+
+                    </div>
+
+                </td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        }
+    );
+
+
+    updateStatistics();
+
+}
+
+
+
+function updateStatistics() {
+
+
+    let total =
+        devices.length;
+
+
+    let systems =
+        new Set(
+            devices.map(function(device) {
+
+                return device.system;
+
+            })
+        ).size;
+
+
+    let average = 0;
+
+
+    if (devices.length > 0) {
+
+        let sum =
+            devices.reduce(
+                function(total, device) {
+
+                    return total +
+                        Number(
+                            device.sellingPrice
+                        );
+
+                },
+                0
+            );
+
+
+        average =
+            sum /
+            devices.length;
+
+    }
+
+
+    document.getElementById(
+        "totalDevices"
+    ).textContent =
+        total;
+
+
+    document.getElementById(
+        "systemsCount"
+    ).textContent =
+        systems;
+
+
+    document.getElementById(
+        "averagePrice"
+    ).textContent =
+        formatNumber(average);
+
+}
+
+
+
+function saveDevices() {
+
+    localStorage.setItem(
+
+        "alshamiDevices",
+
+        JSON.stringify(
+            devices
+        )
+
+    );
+
+}
+
+
+
+function formatNumber(number) {
+
+    return Number(number)
+        .toLocaleString(
+            "en-US",
+            {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            }
+        );
+
+}
+
+
+
+function escapeHtml(text) {
+
+    let div =
+        document.createElement(
+            "div"
+        );
+
+    div.textContent =
+        text;
+
+    return div.innerHTML;
+
+}
+
+
+
+displayDevices();
+
+
+</script></body></html>

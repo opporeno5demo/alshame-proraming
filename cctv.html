@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>CCTV - ALSHAMI System Designer</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Tahoma,sans-serif;
+}
+
+body{
+    background:#f1f5f9;
+    color:#1e293b;
+    min-height:100vh;
+}
+
+.topbar{
+    background:#0f172a;
+    color:white;
+    padding:16px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#38bdf8;
+}
+
+.top-actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.top-btn{
+    border:none;
+    color:white;
+    padding:9px 15px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.back-btn{
+    background:#2563eb;
+}
+
+.quote-btn{
+    background:#16a34a;
+}
+
+.container{
+    max-width:1500px;
+    margin:auto;
+    padding:25px;
+}
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:25px;
+    flex-wrap:wrap;
+}
+
+.page-header h1{
+    color:#0f172a;
+    font-size:28px;
+}
+
+.page-header p{
+    color:#64748b;
+    margin-top:6px;
+}
+
+.currency-box{
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    min-width:220px;
+}
+
+.currency-box label{
+    display:block;
+    font-weight:bold;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+select,
+input{
+    width:100%;
+    padding:11px;
+    border:1px solid #cbd5e1;
+    border-radius:7px;
+    outline:none;
+    background:white;
+}
+
+select:focus,
+input:focus{
+    border-color:#2563eb;
+}
+
+.card{
+    background:white;
+    padding:22px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.card h2{
+    font-size:20px;
+    margin-bottom:18px;
+    color:#0f172a;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+label{
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:7px;
+    color:#334155;
+}
+
+.add-row{
+    display:grid;
+    grid-template-columns:2fr 2fr 1fr 1fr 1fr 1fr auto;
+    gap:10px;
+    align-items:end;
+}
+
+.add-btn{
+    background:#7c3aed;
+    color:white;
+    border:none;
+    padding:11px 18px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.add-btn:hover{
+    background:#6d28d9;
+}
+
+.table-wrapper{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:1100px;
+}
+
+th{
+    background:#e2e8f0;
+    padding:13px;
+    text-align:right;
+    font-size:13px;
+    color:#0f172a;
+}
+
+td{
+    padding:12px;
+    border-bottom:1px solid #e2e8f0;
+    font-size:13px;
+}
+
+.purchase{
+    color:#dc2626;
+    font-weight:bold;
+}
+
+.sale{
+    color:#16a34a;
+    font-weight:bold;
+}
+
+.total{
+    color:#2563eb;
+    font-weight:bold;
+}
+
+.actions{
+    display:flex;
+    gap:5px;
+}
+
+.edit-btn,
+.delete-btn{
+    border:none;
+    color:white;
+    padding:6px 10px;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.edit-btn{
+    background:#2563eb;
+}
+
+.delete-btn{
+    background:#dc2626;
+}
+
+.summary-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.summary{
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:9px;
+    padding:18px;
+}
+
+.summary-title{
+    color:#64748b;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.summary-value{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.summary-purchase{
+    color:#dc2626;
+}
+
+.summary-sale{
+    color:#16a34a;
+}
+
+.summary-profit{
+    color:#2563eb;
+}
+
+.empty{
+    text-align:center;
+    padding:35px;
+    color:#64748b;
+}
+
+.bottom-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.save-btn,
+.clear-btn{
+    border:none;
+    padding:12px 22px;
+    border-radius:7px;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.save-btn{
+    background:#16a34a;
+}
+
+.clear-btn{
+    background:#64748b;
+}
+
+.info{
+    background:#eff6ff;
+    border:1px solid #bfdbfe;
+    color:#1e40af;
+    padding:14px;
+    border-radius:8px;
+    margin-bottom:20px;
+    line-height:1.8;
+}
+
+.badge{
+    display:inline-block;
+    padding:4px 8px;
+    border-radius:15px;
+    background:#dbeafe;
+    color:#1d4ed8;
+    font-size:11px;
+    font-weight:bold;
+}
+
+@media(max-width:1100px){
+
+    .form-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .add-row{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .summary-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:700px){
+
+    .container{
+        padding:15px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .add-row{
+        grid-template-columns:1fr;
+    }
+
+    .summary-grid{
+        grid-template-columns:1fr;
+    }
+
+    .page-header{
+        align-items:stretch;
+    }
+
+    .currency-box{
+        width:100%;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="logo">
+        ALSHAMI
+        <span>System Designer</span>
+    </div>
+
+    <div class="top-actions">
+
+        <button
+            class="top-btn back-btn"
+            onclick="goDashboard()">
+            لوحة التحكم
+        </button>
+
+        <button
+            class="top-btn quote-btn"
+            onclick="goQuotations()">
+            عروض الأسعار
+        </button>
+
+    </div>
+
+</header>
+
+
+<div class="container">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>🎥 CCTV System Designer</h1>
+
+            <p>
+                تصميم وحساب نظام كاميرات المراقبة
+            </p>
+
+        </div>
+
+
+        <div class="currency-box">
+
+            <label>
+                عملة المشروع
+            </label>
+
+            <select
+                id="currency"
+                onchange="updateCurrency()">
+
+                <option value="USD">
+                    دولار أمريكي - USD
+                </option>
+
+                <option value="SYP">
+                    ليرة سورية - SYP
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <div class="info">
+
+        <strong>ملاحظة:</strong>
+        جميع الاختيارات والكميات والأسعار يتم إدخالها يدويًا.
+        يمكنك تعديل سعر الشراء وسعر البيع لكل صنف بشكل مستقل.
+
+    </div>
+
+
+    <!-- معلومات النظام -->
+
+    <section class="card">
+
+        <h2>معلومات نظام CCTV</h2>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+
+                <label>اسم المشروع</label>
+
+                <input
+                    type="text"
+                    id="projectName"
+                    placeholder="مثال: فندق الشامي">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>عدد الكاميرات</label>
+
+                <input
+                    type="number"
+                    id="cameraCount"
+                    min="0"
+                    placeholder="مثال: 16">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>نوع النظام</label>
+
+                <select id="systemType">
+
+                    <option value="IP">
+                        IP Camera
+                    </option>
+
+                    <option value="Analog">
+                        Analog / TVI / CVI
+                    </option>
+
+                    <option value="Hybrid">
+                        Hybrid
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>نوع التسجيل</label>
+
+                <select id="recordingType">
+
+                    <option value="NVR">
+                        NVR
+                    </option>
+
+                    <option value="DVR">
+                        DVR
+                    </option>
+
+                    <option value="XVR">
+                        XVR
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label>ملاحظات النظام</label>
+
+                <input
+                    type="text"
+                    id="systemNotes"
+                    placeholder="ملاحظات أو مواصفات خاصة بالمشروع">
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- إضافة صنف -->
+
+    <section class="card">
+
+        <h2>
+            إضافة مكونات النظام
+        </h2>
+
+
+        <div class="add-row">
+
+            <div class="form-group">
+
+                <label>اسم الصنف *</label>
+
+                <input
+                    type="text"
+                    id="itemName"
+                    placeholder="مثال: كاميرا IP 5MP">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>الوصف / المواصفات</label>
+
+                <input
+                    type="text"
+                    id="itemDescription"
+                    placeholder="مثال: Outdoor - Color Night">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>الكمية *</label>
+
+                <input
+                    type="number"
+                    id="itemQuantity"
+                    min="0"
+                    step="0.01"
+                    value="1">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>الوحدة</label>
+
+                <select id="itemUnit">
+
+                    <option value="قطعة">قطعة</option>
+                    <option value="جهاز">جهاز</option>
+                    <option value="لفة">لفة</option>
+                    <option value="متر">متر</option>
+                    <option value="نقطة">نقطة</option>
+                    <option value="خدمة">خدمة</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>سعر الشراء</label>
+
+                <input
+                    type="number"
+                    id="purchasePrice"
+                    min="0"
+                    step="0.01"
+                    value="0">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>سعر البيع</label>
+
+                <input
+                    type="number"
+                    id="salePrice"
+                    min="0"
+                    step="0.01"
+                    value="0">
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                id="addButton"
+                onclick="addItem()">
+
+                + إضافة
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- جدول الأصناف -->
+
+    <section class="card">
+
+        <h2>
+            مكونات النظام
+        </h2>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>#</th>
+
+                        <th>الصنف</th>
+
+                        <th>الوصف</th>
+
+                        <th>الكمية</th>
+
+                        <th>الوحدة</th>
+
+                        <th>سعر الشراء</th>
+
+                        <th>سعر البيع</th>
+
+                        <th>إجمالي الشراء</th>
+
+                        <th>إجمالي البيع</th>
+
+                        <th>الربح</th>
+
+                        <th>الإجراءات</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="itemsTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- الملخص -->
+
+    <section class="card">
+
+        <h2>
+            ملخص نظام CCTV
+        </h2>
+
+
+        <div class="summary-grid">
+
+            <div class="summary">
+
+                <div class="summary-title">
+                    إجمالي التكلفة
+                </div>
+
+                <div
+                    class="summary-value summary-purchase"
+                    id="purchaseTotal">
+
+                    0 USD
+
+                </div>
+
+            </div>
+
+
+            <div class="summary">
+
+                <div class="summary-title">
+                    إجمالي البيع
+                </div>
+
+                <div
+                    class="summary-value summary-sale"
+                    id="saleTotal">
+
+                    0 USD
+
+                </div>
+
+            </div>
+
+
+            <div class="summary">
+
+                <div class="summary-title">
+                    إجمالي الربح
+                </div>
+
+                <div
+                    class="summary-value summary-profit"
+                    id="profitTotal">
+
+                    0 USD
+
+                </div>
+
+            </div>
+
+
+            <div class="summary">
+
+                <div class="summary-title">
+                    هامش الربح
+                </div>
+
+                <div
+                    class="summary-value"
+                    id="profitMargin">
+
+                    0%
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- أزرار -->
+
+    <section class="card">
+
+        <div class="bottom-actions">
+
+            <button
+                class="save-btn"
+                onclick="saveSystem()">
+
+                💾 حفظ نظام CCTV
+
+            </button>
+
+
+            <button
+                class="clear-btn"
+                onclick="clearSystem()">
+
+                🗑️ مسح النظام
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+<script>
+
+let items = [];
+
+let editingIndex = null;
+
+
+/* =========================
+   العملة
+========================= */
+
+function getCurrency(){
+
+    return document.getElementById(
+        "currency"
+    ).value;
+
+}
+
+
+function getCurrencyName(){
+
+    return getCurrency() === "USD"
+        ? "USD"
+        : "SYP";
+
+}
+
+
+function updateCurrency(){
+
+    renderItems();
+
+}
+
+
+/* =========================
+   إضافة صنف
+========================= */
+
+function addItem(){
+
+    let name =
+        document.getElementById(
+            "itemName"
+        ).value.trim();
+
+
+    let description =
+        document.getElementById(
+            "itemDescription"
+        ).value.trim();
+
+
+    let quantity =
+        parseFloat(
+            document.getElementById(
+                "itemQuantity"
+            ).value
+        );
+
+
+    let unit =
+        document.getElementById(
+            "itemUnit"
+        ).value;
+
+
+    let purchasePrice =
+        parseFloat(
+            document.getElementById(
+                "purchasePrice"
+            ).value
+        );
+
+
+    let salePrice =
+        parseFloat(
+            document.getElementById(
+                "salePrice"
+            ).value
+        );
+
+
+    if(!name){
+
+        alert("من فضلك أدخل اسم الصنف.");
+
+        return;
+
+    }
+
+
+    if(
+        isNaN(quantity) ||
+        quantity <= 0
+    ){
+
+        alert("من فضلك أدخل كمية صحيحة.");
+
+        return;
+
+    }
+
+
+    if(
+        isNaN(purchasePrice) ||
+        purchasePrice < 0
+    ){
+
+        alert("أدخل سعر شراء صحيح.");
+
+        return;
+
+    }
+
+
+    if(
+        isNaN(salePrice) ||
+        salePrice < 0
+    ){
+
+        alert("أدخل سعر بيع صحيح.");
+
+        return;
+
+    }
+
+
+    let item = {
+
+        name:name,
+
+        description:description,
+
+        quantity:quantity,
+
+        unit:unit,
+
+        purchasePrice:purchasePrice,
+
+        salePrice:salePrice
+
+    };
+
+
+    if(editingIndex === null){
+
+        items.push(item);
+
+    }else{
+
+        items[editingIndex] = item;
+
+        editingIndex = null;
+
+        document.getElementById(
+            "addButton"
+        ).textContent =
+            "+ إضافة";
+
+    }
+
+
+    clearItemForm();
+
+    renderItems();
+
+}
+
+
+/* =========================
+   عرض الأصناف
+========================= */
+
+function renderItems(){
+
+    let table =
+        document.getElementById(
+            "itemsTable"
+        );
+
+
+    table.innerHTML = "";
+
+
+    if(items.length === 0){
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="11"
+                    class="empty">
+
+                    لا توجد أصناف مضافة حتى الآن
+
+                </td>
+
+            </tr>
+
+        `;
+
+        calculateSummary();
+
+        return;
+
+    }
+
+
+    items.forEach(
+        function(item,index){
+
+            let purchaseTotal =
+                item.quantity *
+                item.purchasePrice;
+
+
+            let saleTotal =
+                item.quantity *
+                item.salePrice;
+
+
+            let profit =
+                saleTotal -
+                purchaseTotal;
+
+
+            let row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+                    <strong>
+                        ${escapeHtml(item.name)}
+                    </strong>
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        item.description || "-"
+                    )}
+                </td>
+
+                <td>
+                    ${item.quantity}
+                </td>
+
+                <td>
+                    ${escapeHtml(item.unit)}
+                </td>
+
+                <td class="purchase">
+                    ${formatNumber(
+                        item.purchasePrice
+                    )}
+                </td>
+
+                <td class="sale">
+                    ${formatNumber(
+                        item.salePrice
+                    )}
+                </td>
+
+                <td class="purchase">
+                    ${formatNumber(
+                        purchaseTotal
+                    )}
+                </td>
+
+                <td class="sale">
+                    ${formatNumber(
+                        saleTotal
+                    )}
+                </td>
+
+                <td class="total">
+                    ${formatNumber(
+                        profit
+                    )}
+                </td>
+
+                <td>
+
+                    <div class="actions">
+
+                        <button
+                            class="edit-btn"
+                            onclick="editItem(${index})">
+
+                            تعديل
+
+                        </button>
+
+                        <button
+                            class="delete-btn"
+                            onclick="deleteItem(${index})">
+
+                            حذف
+
+                        </button>
+
+                    </div>
+
+                </td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        }
+    );
+
+
+    calculateSummary();
+
+}
+
+
+/* =========================
+   تعديل صنف
+========================= */
+
+function editItem(index){
+
+    let item =
+        items[index];
+
+
+    if(!item){
+        return;
+    }
+
+
+    document.getElementById(
+        "itemName"
+    ).value =
+        item.name;
+
+
+    document.getElementById(
+        "itemDescription"
+    ).value =
+        item.description || "";
+
+
+    document.getElementById(
+        "itemQuantity"
+    ).value =
+        item.quantity;
+
+
+    document.getElementById(
+        "itemUnit"
+    ).value =
+        item.unit;
+
+
+    document.getElementById(
+        "purchasePrice"
+    ).value =
+        item.purchasePrice;
+
+
+    document.getElementById(
+        "salePrice"
+    ).value =
+        item.salePrice;
+
+
+    editingIndex = index;
+
+
+    document.getElementById(
+        "addButton"
+    ).textContent =
+        "حفظ التعديل";
+
+
+    window.scrollTo({
+        top:document.querySelector(
+            ".add-row"
+        ).offsetTop - 100,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   حذف صنف
+========================= */
+
+function deleteItem(index){
+
+    if(
+        !confirm(
+            "هل تريد حذف هذا الصنف؟"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    items.splice(index,1);
+
+    renderItems();
+
+}
+
+
+/* =========================
+   تنظيف النموذج
+========================= */
+
+function clearItemForm(){
+
+    document.getElementById(
+        "itemName"
+    ).value = "";
+
+
+    document.getElementById(
+        "itemDescription"
+    ).value = "";
+
+
+    document.getElementById(
+        "itemQuantity"
+    ).value = "1";
+
+
+    document.getElementById(
+        "itemUnit"
+    ).value =
+        "قطعة";
+
+
+    document.getElementById(
+        "purchasePrice"
+    ).value = "0";
+
+
+    document.getElementById(
+        "salePrice"
+    ).value = "0";
+
+}
+
+
+/* =========================
+   الحسابات
+========================= */
+
+function calculateSummary(){
+
+    let purchaseTotal = 0;
+
+    let saleTotal = 0;
+
+
+    items.forEach(function(item){
+
+        purchaseTotal +=
+            Number(item.quantity) *
+            Number(item.purchasePrice);
+
+
+        saleTotal +=
+            Number(item.quantity) *
+            Number(item.salePrice);
+
+    });
+
+
+    let profit =
+        saleTotal -
+        purchaseTotal;
+
+
+    let margin =
+        saleTotal > 0
+        ? (profit / saleTotal) * 100
+        : 0;
+
+
+    let currency =
+        getCurrencyName();
+
+
+    document.getElementById(
+        "purchaseTotal"
+    ).textContent =
+
+        formatNumber(purchaseTotal) +
+        " " +
+        currency;
+
+
+    document.getElementById(
+        "saleTotal"
+    ).textContent =
+
+        formatNumber(saleTotal) +
+        " " +
+        currency;
+
+
+    document.getElementById(
+        "profitTotal"
+    ).textContent =
+
+        formatNumber(profit) +
+        " " +
+        currency;
+
+
+    document.getElementById(
+        "profitMargin"
+    ).textContent =
+
+        formatNumber(margin) +
+        "%";
+
+}
+
+
+/* =========================
+   حفظ النظام
+========================= */
+
+function saveSystem(){
+
+    let system = {
+
+        id:Date.now(),
+
+        type:"CCTV",
+
+        projectName:
+            document.getElementById(
+                "projectName"
+            ).value.trim(),
+
+        cameraCount:
+            document.getElementById(
+                "cameraCount"
+            ).value,
+
+        systemType:
+            document.getElementById(
+                "systemType"
+            ).value,
+
+        recordingType:
+            document.getElementById(
+                "recordingType"
+            ).value,
+
+        notes:
+            document.getElementById(
+                "systemNotes"
+            ).value.trim(),
+
+        currency:
+            getCurrency(),
+
+        items:items,
+
+        createdAt:
+            new Date().toISOString()
+
+    };
+
+
+    let systems =
+        JSON.parse(
+            localStorage.getItem(
+                "alshamiCCTVSystems"
+            )
+        ) || [];
+
+
+    systems.push(system);
+
+
+    localStorage.setItem(
+        "alshamiCCTVSystems",
+        JSON.stringify(systems)
+    );
+
+
+    alert(
+        "تم حفظ نظام CCTV بنجاح."
+    );
+
+}
+
+
+/* =========================
+   مسح النظام
+========================= */
+
+function clearSystem(){
+
+    if(
+        !confirm(
+            "سيتم حذف جميع الأصناف والبيانات الحالية. هل أنت متأكد؟"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    items = [];
+
+    editingIndex = null;
+
+
+    document.getElementById(
+        "projectName"
+    ).value = "";
+
+
+    document.getElementById(
+        "cameraCount"
+    ).value = "";
+
+
+    document.getElementById(
+        "systemNotes"
+    ).value = "";
+
+
+    document.getElementById(
+        "systemType"
+    ).value = "IP";
+
+
+    document.getElementById(
+        "recordingType"
+    ).value = "NVR";
+
+
+    clearItemForm();
+
+    renderItems();
+
+}
+
+
+/* =========================
+   تنسيق الأرقام
+========================= */
+
+function formatNumber(number){
+
+    return Number(number)
+        .toLocaleString(
+            "en-US",
+            {
+                minimumFractionDigits:0,
+                maximumFractionDigits:2
+            }
+        );
+
+}
+
+
+/* =========================
+   حماية HTML
+========================= */
+
+function escapeHtml(text){
+
+    let div =
+        document.createElement("div");
+
+    div.textContent =
+        text == null
+        ? ""
+        : text;
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================
+   التنقل
+========================= */
+
+function goDashboard(){
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
+
+function goQuotations(){
+
+    window.location.href =
+        "quotations.html";
+
+}
+
+
+/* تشغيل */
+
+renderItems();
+
+</script>
+
+</body>
+</html>

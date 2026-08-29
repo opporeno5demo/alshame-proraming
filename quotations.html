@@ -1,0 +1,3866 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>عروض الأسعار - ALSHAMI System Designer</title><style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Tahoma,sans-serif;
+}
+
+body{
+    background:#f1f5f9;
+    color:#1e293b;
+    min-height:100vh;
+}
+
+.topbar{
+    background:#0f172a;
+    color:white;
+    padding:18px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#38bdf8;
+}
+
+.back-btn{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.container{
+    padding:25px;
+    max-width:1400px;
+    margin:auto;
+}
+
+.page-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.page-title h1{
+    font-size:28px;
+    color:#0f172a;
+}
+
+.page-title p{
+    color:#64748b;
+    margin-top:5px;
+}
+
+.add-btn{
+    background:#16a34a;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:bold;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.stat-card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.stat-card h3{
+    color:#64748b;
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+.stat-number{
+    font-size:28px;
+    font-weight:bold;
+    color:#0f172a;
+}
+
+.form-card,
+.items-card{
+    display:none;
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.form-card h2{
+    margin-bottom:20px;
+    color:#0f172a;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+label{
+    margin-bottom:7px;
+    font-weight:bold;
+    color:#334155;
+    font-size:14px;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:14px;
+    outline:none;
+    background:white;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#2563eb;
+}
+
+textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.buttons{
+    margin-top:20px;
+    display:flex;
+    gap:10px;
+}
+
+.save-btn,
+.cancel-btn{
+    color:white;
+    border:none;
+    padding:11px 25px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.save-btn{
+    background:#16a34a;
+}
+
+.cancel-btn{
+    background:#64748b;
+}
+
+.search-box{
+    background:white;
+    padding:18px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.table-card{
+    background:white;
+    border-radius:12px;
+    overflow-x:auto;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:1000px;
+}
+
+th{
+    background:#e2e8f0;
+    padding:15px;
+    text-align:right;
+    color:#0f172a;
+}
+
+td{
+    padding:14px 15px;
+    border-bottom:1px solid #e2e8f0;
+}
+
+.quotation-number{
+    color:#2563eb;
+    font-weight:bold;
+}
+
+.status{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.status-new{
+    background:#dbeafe;
+    color:#1d4ed8;
+}
+
+.status-sent{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.status-approved{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.status-rejected{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.status-expired{
+    background:#e5e7eb;
+    color:#374151;
+}
+
+.actions{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+}
+
+.edit-btn,
+.delete-btn,
+.items-btn,
+.preview-btn{
+    border:none;
+    padding:7px 12px;
+    border-radius:6px;
+    color:white;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.edit-btn{
+    background:#2563eb;
+}
+
+.items-btn{
+    background:#7c3aed;
+}
+
+.delete-btn{
+    background:#dc2626;
+}
+
+.preview-btn{
+    background:#0891b2;
+}
+
+.items-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+}
+
+.items-header h2{
+    color:#0f172a;
+    font-size:22px;
+}
+
+.selected-quotation{
+    color:#64748b;
+    font-size:14px;
+    margin-top:5px;
+}
+
+.item-form{
+    background:#f8fafc;
+    padding:20px;
+    border-radius:10px;
+    border:1px solid #e2e8f0;
+    margin-bottom:20px;
+}
+
+.item-grid{
+    display:grid;
+    grid-template-columns:2fr 2fr 1fr 1fr 1fr;
+    gap:12px;
+    align-items:end;
+}
+
+.item-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.add-item-btn,
+.save-item-btn,
+.cancel-item-edit-btn{
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    width:100%;
+}
+
+.add-item-btn{
+    background:#7c3aed;
+}
+
+.save-item-btn{
+    background:#16a34a;
+    display:none;
+}
+
+.cancel-item-edit-btn{
+    background:#64748b;
+    display:none;
+}
+
+.items-table{
+    overflow-x:auto;
+}
+
+.items-table table{
+    min-width:950px;
+}
+
+.item-total{
+    font-weight:bold;
+    color:#16a34a;
+}
+
+.item-edit-btn,
+.remove-item-btn{
+    color:white;
+    border:none;
+    padding:7px 12px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.item-edit-btn{
+    background:#2563eb;
+}
+
+.remove-item-btn{
+    background:#dc2626;
+}
+
+.items-summary{
+    margin-top:20px;
+    background:#f8fafc;
+    padding:20px;
+    border-radius:10px;
+    border:1px solid #e2e8f0;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.summary-box{
+    background:white;
+    padding:15px;
+    border-radius:8px;
+    border:1px solid #e2e8f0;
+}
+
+.summary-label{
+    color:#64748b;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.summary-value{
+    font-size:21px;
+    font-weight:bold;
+    color:#0f172a;
+}
+
+.discount-controls{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.tax-input{
+    margin-top:8px;
+}
+
+.after-discount{
+    color:#2563eb;
+}
+
+.tax-value{
+    color:#d97706;
+}
+
+.final-total{
+    color:#16a34a;
+    font-size:24px;
+}
+
+
+/* =========================
+   نافذة معاينة عرض السعر
+========================= */
+
+.preview-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.75);
+    z-index:9999;
+    overflow-y:auto;
+    padding:25px;
+}
+
+.preview-toolbar{
+    max-width:900px;
+    margin:0 auto 15px;
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.preview-toolbar button{
+    border:none;
+    color:white;
+    padding:11px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.print-preview-btn{
+    background:#16a34a;
+}
+
+.close-preview-btn{
+    background:#dc2626;
+}
+
+.preview-paper{
+    width:210mm;
+    min-height:297mm;
+    background:white;
+    margin:auto;
+    padding:15mm;
+    box-shadow:0 5px 30px rgba(0,0,0,.3);
+    color:#111827;
+}
+
+.print-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    border-bottom:3px solid #0f172a;
+    padding-bottom:15px;
+    margin-bottom:20px;
+}
+
+.company-info h1{
+    font-size:27px;
+    color:#0f172a;
+    margin-bottom:5px;
+}
+
+.company-info h2{
+    font-size:16px;
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+.company-info p{
+    font-size:12px;
+    line-height:1.8;
+    color:#475569;
+}
+
+.quote-title{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.quote-title h2{
+    font-size:25px;
+    color:#0f172a;
+}
+
+.quote-title p{
+    color:#64748b;
+    margin-top:5px;
+}
+
+.quote-meta{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.meta-box{
+    border:1px solid #cbd5e1;
+    padding:10px;
+    border-radius:6px;
+}
+
+.meta-box strong{
+    display:inline-block;
+    min-width:90px;
+    color:#475569;
+}
+
+.preview-items{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+.preview-items th{
+    background:#e2e8f0;
+    border:1px solid #cbd5e1;
+    padding:9px;
+    font-size:12px;
+}
+
+.preview-items td{
+    border:1px solid #cbd5e1;
+    padding:8px;
+    font-size:12px;
+}
+
+.preview-items td.center,
+.preview-items th.center{
+    text-align:center;
+}
+
+.preview-totals{
+    width:50%;
+    margin-top:20px;
+    margin-right:auto;
+    border-collapse:collapse;
+}
+
+.preview-totals td{
+    border:1px solid #cbd5e1;
+    padding:9px;
+    font-size:13px;
+}
+
+.preview-totals td:first-child{
+    background:#f8fafc;
+    font-weight:bold;
+}
+
+.preview-final{
+    font-size:17px !important;
+    font-weight:bold;
+}
+
+.preview-notes{
+    margin-top:25px;
+    border:1px solid #cbd5e1;
+    padding:12px;
+    border-radius:6px;
+}
+
+.preview-notes h3{
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+.preview-notes p{
+    font-size:12px;
+    line-height:1.8;
+    white-space:pre-wrap;
+}
+
+.preview-terms{
+    margin-top:20px;
+}
+
+.preview-terms h3{
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+.preview-terms ol{
+    padding-right:20px;
+    font-size:11px;
+    line-height:1.8;
+}
+
+.signature-area{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    margin-top:55px;
+    text-align:center;
+}
+
+.signature-box{
+    border-top:1px solid #64748b;
+    padding-top:8px;
+    font-size:12px;
+}
+
+.preview-footer{
+    margin-top:35px;
+    padding-top:10px;
+    border-top:1px solid #cbd5e1;
+    text-align:center;
+    font-size:10px;
+    color:#64748b;
+}
+
+
+/* =========================
+   الطباعة
+========================= */
+
+@media print{
+
+    @page{
+        size:A4;
+        margin:0;
+    }
+
+    body{
+        background:white;
+    }
+
+    body *{
+        visibility:hidden;
+    }
+
+    .preview-overlay,
+    .preview-overlay *{
+        visibility:visible;
+    }
+
+    .preview-overlay{
+        display:block !important;
+        position:absolute;
+        inset:0;
+        background:white;
+        padding:0;
+        overflow:visible;
+    }
+
+    .preview-toolbar{
+        display:none !important;
+    }
+
+    .preview-paper{
+        width:210mm;
+        min-height:297mm;
+        box-shadow:none;
+        margin:0;
+        padding:15mm;
+    }
+}
+
+
+@media(max-width:1000px){
+
+    .items-summary{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .item-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .preview-paper{
+        width:100%;
+        min-height:auto;
+    }
+}
+
+
+@media(max-width:700px){
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .item-grid{
+        grid-template-columns:1fr;
+    }
+
+    .items-summary{
+        grid-template-columns:1fr;
+    }
+
+    .add-btn{
+        width:100%;
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+
+    .save-btn,
+    .cancel-btn{
+        width:100%;
+    }
+
+    .item-buttons{
+        flex-direction:column;
+    }
+
+    .quote-meta{
+        grid-template-columns:1fr;
+    }
+
+    .preview-totals{
+        width:100%;
+    }
+
+    .signature-area{
+        gap:20px;
+    }
+}
+
+</style></head><body><div class="topbar"><div class="logo">
+    ALSHAMI
+    <span>System Designer</span>
+</div>
+
+<button class="back-btn" onclick="goDashboard()">
+    لوحة التحكم
+</button>
+
+</div><div class="container"><div class="page-title"><div>
+
+    <h1>عروض الأسعار</h1>
+
+    <p>
+        إنشاء وإدارة عروض أسعار العملاء والمشاريع
+    </p>
+
+</div>
+
+<button class="add-btn" onclick="showForm()">
+    + إضافة عرض سعر
+</button>
+
+</div><div class="stats"><div class="stat-card">
+    <h3>إجمالي العروض</h3>
+    <div class="stat-number" id="totalQuotations">0</div>
+</div>
+
+<div class="stat-card">
+    <h3>جديدة</h3>
+    <div class="stat-number" id="newQuotations">0</div>
+</div>
+
+<div class="stat-card">
+    <h3>مرسلة</h3>
+    <div class="stat-number" id="sentQuotations">0</div>
+</div>
+
+<div class="stat-card">
+    <h3>معتمدة</h3>
+    <div class="stat-number" id="approvedQuotations">0</div>
+</div>
+
+</div><div class="form-card" id="quotationForm"><h2 id="formTitle">
+    إضافة عرض سعر جديد
+</h2>
+
+<div class="form-grid">
+
+    <div class="form-group">
+        <label>رقم العرض</label>
+        <input type="text" id="quotationNumber" readonly>
+    </div>
+
+    <div class="form-group">
+        <label>التاريخ *</label>
+        <input type="date" id="quotationDate">
+    </div>
+
+    <div class="form-group">
+        <label>العميل *</label>
+        <select id="customerSelect">
+            <option value="">اختر العميل</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>المشروع</label>
+        <select id="projectSelect">
+            <option value="">اختر المشروع</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>العملة *</label>
+        <select id="currency">
+
+            <option value="EGP">
+                جنيه مصري - EGP
+            </option>
+
+            <option value="SYP">
+                ليرة سورية - SYP
+            </option>
+
+            <option value="USD">
+                دولار أمريكي - USD
+            </option>
+
+            <option value="EUR">
+                يورو - EUR
+            </option>
+
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>حالة العرض</label>
+
+        <select id="status">
+
+            <option value="جديد">جديد</option>
+            <option value="مرسل">مرسل</option>
+            <option value="معتمد">معتمد</option>
+            <option value="مرفوض">مرفوض</option>
+            <option value="منتهي">منتهي</option>
+
+        </select>
+    </div>
+
+    <div class="form-group full">
+
+        <label>ملاحظات</label>
+
+        <textarea
+            id="notes"
+            placeholder="ملاحظات العرض..."></textarea>
+
+    </div>
+
+</div>
+
+
+<div class="buttons">
+
+    <button
+        class="save-btn"
+        id="saveBtn"
+        onclick="saveQuotation()">
+
+        حفظ العرض
+
+    </button>
+
+    <button
+        class="cancel-btn"
+        onclick="cancelForm()">
+
+        إلغاء
+
+    </button>
+
+</div>
+
+</div><div class="items-card" id="itemsCard"><div class="items-header">
+
+    <div>
+
+        <h2>أصناف عرض السعر</h2>
+
+        <div
+            class="selected-quotation"
+            id="selectedQuotationText">
+        </div>
+
+    </div>
+
+    <button
+        class="cancel-btn"
+        onclick="closeItems()">
+
+        إغلاق
+
+    </button>
+
+</div>
+
+
+<div class="item-form">
+
+    <div class="item-grid">
+
+        <div class="form-group">
+
+            <label>اسم الصنف *</label>
+
+            <input
+                type="text"
+                id="itemName"
+                placeholder="مثال: كاميرا 5MP">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>الوصف</label>
+
+            <input
+                type="text"
+                id="itemDescription"
+                placeholder="الوصف أو المواصفات">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>الكمية *</label>
+
+            <input
+                type="number"
+                id="itemQuantity"
+                min="0"
+                step="0.01"
+                value="1">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>الوحدة</label>
+
+            <select id="itemUnit">
+
+                <option value="قطعة">قطعة</option>
+                <option value="متر">متر</option>
+                <option value="لفة">لفة</option>
+                <option value="جهاز">جهاز</option>
+                <option value="خدمة">خدمة</option>
+                <option value="نقطة">نقطة</option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>سعر الوحدة *</label>
+
+            <input
+                type="number"
+                id="itemPrice"
+                min="0"
+                step="0.01"
+                placeholder="0">
+
+        </div>
+
+    </div>
+
+
+    <div class="item-buttons">
+
+        <button
+            class="add-item-btn"
+            id="addItemBtn"
+            onclick="addItem()">
+
+            + إضافة الصنف
+
+        </button>
+
+        <button
+            class="save-item-btn"
+            id="saveItemBtn"
+            onclick="saveItemEdit()">
+
+            حفظ التعديل
+
+        </button>
+
+        <button
+            class="cancel-item-edit-btn"
+            id="cancelItemEditBtn"
+            onclick="cancelItemEdit()">
+
+            إلغاء التعديل
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="items-table">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>#</th>
+                <th>الصنف</th>
+                <th>الوصف</th>
+                <th>الكمية</th>
+                <th>الوحدة</th>
+                <th>سعر الوحدة</th>
+                <th>الإجمالي</th>
+                <th>الإجراءات</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="itemsTableBody"></tbody>
+
+    </table>
+
+</div>
+
+
+<div class="items-summary">
+
+    <div class="summary-box">
+
+        <div class="summary-label">
+            الإجمالي قبل الخصم
+        </div>
+
+        <div
+            class="summary-value"
+            id="itemsSubtotal">
+
+            0
+
+        </div>
+
+    </div>
+
+
+    <div class="summary-box">
+
+        <div class="summary-label">
+            الخصم
+        </div>
+
+        <div class="discount-controls">
+
+            <select
+                id="discountType"
+                onchange="calculateTotals()">
+
+                <option value="amount">
+                    مبلغ
+                </option>
+
+                <option value="percent">
+                    نسبة %
+                </option>
+
+            </select>
+
+            <input
+                type="number"
+                id="discountValue"
+                min="0"
+                step="0.01"
+                value="0"
+                oninput="calculateTotals()">
+
+        </div>
+
+        <div style="margin-top:10px;color:#64748b">
+
+            قيمة الخصم:
+
+            <strong id="discountAmount">
+                0
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <div class="summary-box">
+
+        <div class="summary-label">
+            الإجمالي بعد الخصم
+        </div>
+
+        <div
+            class="summary-value after-discount"
+            id="afterDiscount">
+
+            0
+
+        </div>
+
+    </div>
+
+
+    <div class="summary-box">
+
+        <div class="summary-label">
+            الضريبة
+        </div>
+
+        <input
+            class="tax-input"
+            type="number"
+            id="taxRate"
+            min="0"
+            max="100"
+            step="0.01"
+            value="14"
+            oninput="calculateTotals()">
+
+        <div style="margin-top:8px;color:#64748b">
+
+            قيمة الضريبة:
+
+            <strong
+                class="tax-value"
+                id="taxAmount">
+
+                0
+
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="summary-box"
+        style="grid-column:1/-1">
+
+        <div class="summary-label">
+            الإجمالي النهائي
+        </div>
+
+        <div
+            class="summary-value final-total"
+            id="finalTotal">
+
+            0
+
+        </div>
+
+    </div>
+
+</div>
+
+</div><div class="search-box"><input
+    type="text"
+    id="searchInput"
+    placeholder="ابحث برقم العرض أو اسم العميل أو المشروع..."
+    onkeyup="searchQuotations()">
+
+</div><div class="table-card"><table><thead><tr><th>رقم العرض</th>
+<th>التاريخ</th>
+<th>العميل</th>
+<th>المشروع</th>
+<th>العملة</th>
+<th>الحالة</th>
+<th>الإجراءات</th></tr></thead><tbody id="quotationsTable"></tbody></table></div></div><!-- =========================
+     نافذة المعاينة
+========================= --><div
+    class="preview-overlay"
+    id="previewOverlay"><div class="preview-toolbar">
+
+    <div>
+
+        <button
+            class="print-preview-btn"
+            onclick="printQuotation()">
+
+            🖨️ طباعة العرض
+
+        </button>
+
+    </div>
+
+    <button
+        class="close-preview-btn"
+        onclick="closePreview()">
+
+        ✕ إغلاق
+
+    </button>
+
+</div>
+
+
+<div
+    class="preview-paper"
+    id="previewPaper">
+
+</div>
+
+</div><script>
+
+
+let quotations =
+    JSON.parse(
+        localStorage.getItem("alshamiQuotations")
+    ) || [];
+
+
+let customers =
+    JSON.parse(
+        localStorage.getItem("alshamiCustomers")
+    ) || [];
+
+
+let projects =
+    JSON.parse(
+        localStorage.getItem("alshamiProjects")
+    ) || [];
+
+
+let editingQuotationId = null;
+let selectedQuotationId = null;
+let editingItemId = null;
+
+
+
+function goDashboard(){
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
+
+
+function getNextQuotationNumber(){
+
+    let highest = 0;
+
+    quotations.forEach(function(quotation){
+
+        if(!quotation.quotationNumber){
+            return;
+        }
+
+        let number =
+            parseInt(
+                quotation.quotationNumber
+                    .replace("QT-","")
+            );
+
+        if(
+            !isNaN(number) &&
+            number > highest
+        ){
+            highest = number;
+        }
+
+    });
+
+    return "QT-" +
+        String(highest + 1)
+            .padStart(4,"0");
+
+}
+
+
+
+function setTodayDate(){
+
+    let today =
+        new Date()
+            .toISOString()
+            .split("T")[0];
+
+    document.getElementById(
+        "quotationDate"
+    ).value = today;
+
+}
+
+
+
+function loadCustomers(){
+
+    let select =
+        document.getElementById(
+            "customerSelect"
+        );
+
+    select.innerHTML =
+        `<option value="">اختر العميل</option>`;
+
+    customers.forEach(function(customer){
+
+        let option =
+            document.createElement("option");
+
+        option.value =
+            customer.id;
+
+        option.textContent =
+            customer.customerNumber +
+            " - " +
+            customer.name;
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+
+function loadProjects(customerId=""){
+
+    let select =
+        document.getElementById(
+            "projectSelect"
+        );
+
+    select.innerHTML =
+        `<option value="">اختر المشروع</option>`;
+
+    let filteredProjects = projects;
+
+    if(customerId !== ""){
+
+        filteredProjects =
+            projects.filter(function(project){
+
+                return String(project.customerId) ===
+                    String(customerId);
+
+            });
+
+    }
+
+    filteredProjects.forEach(function(project){
+
+        let option =
+            document.createElement("option");
+
+        option.value =
+            project.id;
+
+        option.textContent =
+            project.name ||
+            "مشروع بدون اسم";
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+
+document.getElementById(
+    "customerSelect"
+).addEventListener(
+    "change",
+    function(){
+
+        loadProjects(this.value);
+
+    }
+);
+
+
+
+function showForm(){
+
+    editingQuotationId = null;
+
+    clearForm();
+
+    document.getElementById(
+        "formTitle"
+    ).textContent =
+        "إضافة عرض سعر جديد";
+
+    document.getElementById(
+        "saveBtn"
+    ).textContent =
+        "حفظ العرض";
+
+    document.getElementById(
+        "quotationNumber"
+    ).value =
+        getNextQuotationNumber();
+
+    setTodayDate();
+
+    loadCustomers();
+
+    loadProjects();
+
+    document.getElementById(
+        "quotationForm"
+    ).style.display =
+        "block";
+
+    document.getElementById(
+        "quotationForm"
+    ).scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+
+function cancelForm(){
+
+    editingQuotationId = null;
+
+    clearForm();
+
+    document.getElementById(
+        "quotationForm"
+    ).style.display =
+        "none";
+
+}
+
+
+
+function saveQuotation(){
+
+    let quotationNumber =
+        document.getElementById(
+            "quotationNumber"
+        ).value;
+
+    let date =
+        document.getElementById(
+            "quotationDate"
+        ).value;
+
+    let customerId =
+        document.getElementById(
+            "customerSelect"
+        ).value;
+
+    let projectId =
+        document.getElementById(
+            "projectSelect"
+        ).value;
+
+    let currency =
+        document.getElementById(
+            "currency"
+        ).value;
+
+    let status =
+        document.getElementById(
+            "status"
+        ).value;
+
+    let notes =
+        document.getElementById(
+            "notes"
+        ).value.trim();
+
+
+    if(!date){
+
+        alert("من فضلك اختر تاريخ العرض.");
+
+        return;
+
+    }
+
+
+    if(!customerId){
+
+        alert("من فضلك اختر العميل.");
+
+        return;
+
+    }
+
+
+    if(editingQuotationId !== null){
+
+        let quotation =
+            quotations.find(function(item){
+
+                return item.id ===
+                    editingQuotationId;
+
+            });
+
+
+        if(!quotation){
+
+            alert("لم يتم العثور على العرض.");
+
+            return;
+
+        }
+
+
+        quotation.date = date;
+        quotation.customerId = customerId;
+        quotation.projectId = projectId;
+        quotation.currency = currency;
+        quotation.status = status;
+        quotation.notes = notes;
+
+
+        if(!quotation.items){
+            quotation.items = [];
+        }
+
+
+        if(quotation.discountType === undefined){
+            quotation.discountType = "amount";
+        }
+
+
+        if(quotation.discountValue === undefined){
+            quotation.discountValue = 0;
+        }
+
+
+        if(quotation.taxRate === undefined){
+            quotation.taxRate = 14;
+        }
+
+
+        alert("تم تعديل عرض السعر بنجاح.");
+
+    }else{
+
+        let quotation = {
+
+            id:Date.now(),
+
+            quotationNumber:
+                quotationNumber,
+
+            date:date,
+
+            customerId:
+                customerId,
+
+            projectId:
+                projectId,
+
+            currency:
+                currency,
+
+            status:
+                status,
+
+            notes:
+                notes,
+
+            items:[],
+
+            discountType:
+                "amount",
+
+            discountValue:
+                0,
+
+            discountAmount:
+                0,
+
+            subtotal:
+                0,
+
+            afterDiscount:
+                0,
+
+            taxRate:
+                14,
+
+            taxAmount:
+                0,
+
+            finalTotal:
+                0
+
+        };
+
+
+        quotations.push(
+            quotation
+        );
+
+
+        alert("تم حفظ عرض السعر بنجاح.");
+
+    }
+
+
+    saveQuotations();
+
+    displayQuotations();
+
+    cancelForm();
+
+}
+
+
+
+function getCustomerName(customerId){
+
+    let customer =
+        customers.find(function(customer){
+
+            return String(customer.id) ===
+                String(customerId);
+
+        });
+
+    if(!customer){
+        return "-";
+    }
+
+    return customer.name;
+
+}
+
+
+
+function getProjectName(projectId){
+
+    let project =
+        projects.find(function(project){
+
+            return String(project.id) ===
+                String(projectId);
+
+        });
+
+    if(!project){
+        return "-";
+    }
+
+    return project.name ||
+        "مشروع بدون اسم";
+
+}
+
+
+
+function getCurrencyName(currency){
+
+    let currencies = {
+
+        EGP:"جنيه مصري",
+        SYP:"ليرة سورية",
+        USD:"دولار أمريكي",
+        EUR:"يورو"
+
+    };
+
+    return currencies[currency] ||
+        currency;
+
+}
+
+
+
+function getStatusClass(status){
+
+    if(status === "جديد"){
+        return "status-new";
+    }
+
+    if(status === "مرسل"){
+        return "status-sent";
+    }
+
+    if(status === "معتمد"){
+        return "status-approved";
+    }
+
+    if(status === "مرفوض"){
+        return "status-rejected";
+    }
+
+    return "status-expired";
+
+}
+
+
+
+function displayQuotations(){
+
+    let table =
+        document.getElementById(
+            "quotationsTable"
+        );
+
+    table.innerHTML = "";
+
+
+    if(quotations.length === 0){
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="7"
+                    style="text-align:center;padding:30px">
+
+                    لا توجد عروض أسعار حتى الآن
+
+                </td>
+
+            </tr>
+
+        `;
+
+        updateStatistics();
+
+        return;
+
+    }
+
+
+    quotations.forEach(function(quotation){
+
+        let row =
+            document.createElement("tr");
+
+
+        row.innerHTML = `
+
+            <td>
+
+                <span class="quotation-number">
+
+                    ${escapeHtml(
+                        quotation.quotationNumber || "-"
+                    )}
+
+                </span>
+
+            </td>
+
+            <td>
+                ${escapeHtml(
+                    quotation.date || "-"
+                )}
+            </td>
+
+            <td>
+                ${escapeHtml(
+                    getCustomerName(
+                        quotation.customerId
+                    )
+                )}
+            </td>
+
+            <td>
+                ${escapeHtml(
+                    getProjectName(
+                        quotation.projectId
+                    )
+                )}
+            </td>
+
+            <td>
+                ${escapeHtml(
+                    getCurrencyName(
+                        quotation.currency
+                    )
+                )}
+            </td>
+
+            <td>
+
+                <span
+                    class="status ${getStatusClass(
+                        quotation.status
+                    )}">
+
+                    ${escapeHtml(
+                        quotation.status || "-"
+                    )}
+
+                </span>
+
+            </td>
+
+            <td>
+
+                <div class="actions">
+
+                    <button
+                        class="preview-btn"
+                        onclick="openPreview(
+                            ${quotation.id}
+                        )">
+
+                        معاينة
+
+                    </button>
+
+                    <button
+                        class="items-btn"
+                        onclick="openItems(
+                            ${quotation.id}
+                        )">
+
+                        الأصناف
+
+                    </button>
+
+                    <button
+                        class="edit-btn"
+                        onclick="editQuotation(
+                            ${quotation.id}
+                        )">
+
+                        تعديل
+
+                    </button>
+
+                    <button
+                        class="delete-btn"
+                        onclick="deleteQuotation(
+                            ${quotation.id}
+                        )">
+
+                        حذف
+
+                    </button>
+
+                </div>
+
+            </td>
+
+        `;
+
+
+        table.appendChild(row);
+
+    });
+
+
+    updateStatistics();
+
+}
+
+
+
+function editQuotation(id){
+
+    let quotation =
+        quotations.find(function(item){
+
+            return item.id === id;
+
+        });
+
+
+    if(!quotation){
+        return;
+    }
+
+
+    editingQuotationId = id;
+
+
+    document.getElementById(
+        "formTitle"
+    ).textContent =
+        "تعديل عرض السعر";
+
+
+    document.getElementById(
+        "saveBtn"
+    ).textContent =
+        "حفظ التعديل";
+
+
+    loadCustomers();
+
+
+    document.getElementById(
+        "customerSelect"
+    ).value =
+        quotation.customerId;
+
+
+    loadProjects(
+        quotation.customerId
+    );
+
+
+    document.getElementById(
+        "projectSelect"
+    ).value =
+        quotation.projectId || "";
+
+
+    document.getElementById(
+        "quotationNumber"
+    ).value =
+        quotation.quotationNumber;
+
+
+    document.getElementById(
+        "quotationDate"
+    ).value =
+        quotation.date;
+
+
+    document.getElementById(
+        "currency"
+    ).value =
+        quotation.currency;
+
+
+    document.getElementById(
+        "status"
+    ).value =
+        quotation.status;
+
+
+    document.getElementById(
+        "notes"
+    ).value =
+        quotation.notes || "";
+
+
+    document.getElementById(
+        "quotationForm"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "quotationForm"
+    ).scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+
+function deleteQuotation(id){
+
+    let quotation =
+        quotations.find(function(item){
+
+            return item.id === id;
+
+        });
+
+
+    if(!quotation){
+        return;
+    }
+
+
+    let answer =
+        confirm(
+            "هل أنت متأكد من حذف عرض السعر؟\n\n" +
+            quotation.quotationNumber
+        );
+
+
+    if(!answer){
+        return;
+    }
+
+
+    quotations =
+        quotations.filter(function(item){
+
+            return item.id !== id;
+
+        });
+
+
+    saveQuotations();
+
+
+    if(selectedQuotationId === id){
+        closeItems();
+    }
+
+
+    displayQuotations();
+
+
+    alert("تم حذف عرض السعر.");
+
+}
+
+
+
+function searchQuotations(){
+
+    let search =
+        document.getElementById(
+            "searchInput"
+        ).value.toLowerCase();
+
+
+    let rows =
+        document
+            .getElementById(
+                "quotationsTable"
+            )
+            .getElementsByTagName("tr");
+
+
+    for(
+        let i=0;
+        i<rows.length;
+        i++
+    ){
+
+        let text =
+            rows[i]
+                .textContent
+                .toLowerCase();
+
+        rows[i].style.display =
+            text.includes(search)
+            ? ""
+            : "none";
+
+    }
+
+}
+
+
+
+function updateStatistics(){
+
+    let total =
+        quotations.length;
+
+
+    let newCount =
+        quotations.filter(function(item){
+
+            return item.status === "جديد";
+
+        }).length;
+
+
+    let sentCount =
+        quotations.filter(function(item){
+
+            return item.status === "مرسل";
+
+        }).length;
+
+
+    let approvedCount =
+        quotations.filter(function(item){
+
+            return item.status === "معتمد";
+
+        }).length;
+
+
+    document.getElementById(
+        "totalQuotations"
+    ).textContent =
+        total;
+
+    document.getElementById(
+        "newQuotations"
+    ).textContent =
+        newCount;
+
+    document.getElementById(
+        "sentQuotations"
+    ).textContent =
+        sentCount;
+
+    document.getElementById(
+        "approvedQuotations"
+    ).textContent =
+        approvedCount;
+
+}
+
+
+
+function clearForm(){
+
+    document.getElementById(
+        "quotationNumber"
+    ).value = "";
+
+    document.getElementById(
+        "quotationDate"
+    ).value = "";
+
+    document.getElementById(
+        "customerSelect"
+    ).innerHTML =
+        `<option value="">اختر العميل</option>`;
+
+    document.getElementById(
+        "projectSelect"
+    ).innerHTML =
+        `<option value="">اختر المشروع</option>`;
+
+    document.getElementById(
+        "currency"
+    ).value =
+        "EGP";
+
+    document.getElementById(
+        "status"
+    ).value =
+        "جديد";
+
+    document.getElementById(
+        "notes"
+    ).value = "";
+
+}
+
+
+
+function openItems(id){
+
+    let quotation =
+        quotations.find(function(item){
+
+            return item.id === id;
+
+        });
+
+
+    if(!quotation){
+
+        alert("لم يتم العثور على عرض السعر.");
+
+        return;
+
+    }
+
+
+    if(!quotation.items){
+        quotation.items = [];
+    }
+
+
+    if(quotation.discountType === undefined){
+        quotation.discountType = "amount";
+    }
+
+
+    if(quotation.discountValue === undefined){
+        quotation.discountValue = 0;
+    }
+
+
+    if(quotation.taxRate === undefined){
+        quotation.taxRate = 14;
+    }
+
+
+    selectedQuotationId = id;
+
+    editingItemId = null;
+
+
+    document.getElementById(
+        "selectedQuotationText"
+    ).textContent =
+
+        "العرض: " +
+        quotation.quotationNumber +
+        " | العميل: " +
+        getCustomerName(
+            quotation.customerId
+        );
+
+
+    document.getElementById(
+        "itemsCard"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "discountType"
+    ).value =
+        quotation.discountType;
+
+
+    document.getElementById(
+        "discountValue"
+    ).value =
+        quotation.discountValue;
+
+
+    document.getElementById(
+        "taxRate"
+    ).value =
+        quotation.taxRate;
+
+
+    clearItemForm();
+
+    displayItems();
+
+
+    document.getElementById(
+        "itemsCard"
+    ).scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+
+function closeItems(){
+
+    selectedQuotationId = null;
+
+    editingItemId = null;
+
+    document.getElementById(
+        "itemsCard"
+    ).style.display =
+        "none";
+
+    clearItemForm();
+
+}
+
+
+
+function clearItemForm(){
+
+    document.getElementById(
+        "itemName"
+    ).value = "";
+
+    document.getElementById(
+        "itemDescription"
+    ).value = "";
+
+    document.getElementById(
+        "itemQuantity"
+    ).value = "1";
+
+    document.getElementById(
+        "itemUnit"
+    ).value = "قطعة";
+
+    document.getElementById(
+        "itemPrice"
+    ).value = "";
+
+    editingItemId = null;
+
+
+    document.getElementById(
+        "addItemBtn"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "saveItemBtn"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "cancelItemEditBtn"
+    ).style.display =
+        "none";
+
+}
+
+
+
+function addItem(){
+
+    if(selectedQuotationId === null){
+
+        alert("اختر عرض سعر أولًا.");
+
+        return;
+
+    }
+
+
+    let quotation =
+        quotations.find(function(item){
+
+            return item.id ===
+                selectedQuotationId;
+
+        });
+
+
+    if(!quotation){
+
+        alert("لم يتم العثور على عرض السعر.");
+
+        return;
+
+    }
+
+
+    let name =
+        document.getElementById(
+            "itemName"
+        ).value.trim();
+
+
+    let description =
+        document.getElementById(
+            "itemDescription"
+        ).value.trim();
+
+
+    let quantity =
+        parseFloat(
+            document.getElementById(
+                "itemQuantity"
+            ).value
+        );
+
+
+    let unit =
+        document.getElementById(
+            "itemUnit"
+        ).value;
+
+
+    let price =
+        parseFloat(
+            document.getElementById(
+                "itemPrice"
+            ).value
+        );
+
+
+    if(!name){
+
+        alert("من فضلك اكتب اسم الصنف.");
+
+        return;
+
+    }
+
+
+    if(
+        isNaN(quantity) ||
+        quantity <= 0
+    ){
+
+        alert("من فضلك أدخل كمية صحيحة.");
+
+        return;
+
+    }
+
+
+    if(
+        isNaN(price) ||
+        price < 0
+    ){
+
+        alert("من فضلك أدخل سعر الوحدة.");
+
+        return;
+
+    }
+
+
+    let item = {
+
+        id:Date.now(),
+
+        name:name,
+
+        description:description,
+
+        quantity:quantity,
+
+        unit:unit,
+
+        price:price,
+
+        total:
+            quantity * price
+
+    };
+
+
+    if(!quotation.items){
+        quotation.items = [];
+    }
+
+
+    quotation.items.push(item);
+
+
+    saveQuotations();
+
+    displayItems();
+
+    clearItemForm();
+
+
+    document.getElementById(
+        "itemName"
+    ).focus();
+
+}
+
+
+
+function editItem(itemId){
+
+    if(selectedQuotationId === null){
+        return;
+    }
+
+
+    let quotation =
+        quotations.find(function(item){
+
+            return item.id ===
+                selectedQuotationId;
+
+        });
+
+
+    if(
+        !quotation ||
+        !quotation.items
+    ){
+        return;
+    }
+
+
+    let item =
+        quotation.items.find(function(item){
+
+            return item.id === itemId;
+
+        });
+
+
+    if(!item){
+
+        alert("لم يتم العثور على الصنف.");
+
+        return;
+
+    }
+
+
+    editingItemId = itemId;
+
+
+    document.getElementById(
+        "itemName"
+    ).value =
+        item.name;
+
+
+    document.getElementById(
+        "itemDescription"
+    ).value =
+        item.description || "";
+
+
+    document.getElementById(
+        "itemQuantity"
+    ).value =
+        item.quantity;
+
+
+    document.getElementById(
+        "itemUnit"
+    ).value =
+        item.unit;
+
+
+    document.getElementById(
+        "itemPrice"
+    ).value =
+        item.price;
+
+
+    document.getElementById(
+        "addItemBtn"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "saveItemBtn"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "cancelItemEditBtn"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "itemName"
+    ).focus();
+
+}
+
+
+
+function saveItemEdit(){
+
+    if(
+        selectedQuotationId === null ||
+        editingItemId === null
+    ){
+        return;
+    }
+
+
+    let quotation =
+        quotations.find(function(item){
+
+            return item.id ===
+                selectedQuotationId;
+
+        });
+
+
+    if(
+        !quotation ||
+        !quotation.items
+    ){
+        return;
+    }
+
+
+    let name =
+        document.getElementById(
+            "itemName"
+        ).value.trim();
+
+
+    let description =
+        document.getElementById(
+            "itemDescription"
+        ).value.trim();
+
+
+    let quantity =
+        parseFloat(
+            document.getElementById(
+                "itemQuantity"
+            ).value
+        );
+
+
+    let unit =
+        document.getElementById(
+            "itemUnit"
+        ).value;
+
+
+    let price =
+        parseFloat(
+            document.getElementById(
+                "itemPrice"
+            ).value
+        );
+
+
+    if(!name){
+
+        alert("من فضلك اكتب اسم الصنف.");
+
+        return;
+
+    }
+
+
+    if(
+        isNaN(quantity) ||
+        quantity <= 0
+    ){
+
+        alert("من فضلك أدخل كمية صحيحة.");
+
+        return;
+
+    }
+
+
+    if(
+        isNaN(price) ||
+        price < 0
+    ){
+
+        alert("من فضلك أدخل سعر الوحدة.");
+
+        return;
+
+    }
+
+
+    let item =
+        quotation.items.find(function(item){
+
+            return item.id ===
+                editingItemId;
+
+        });
+
+
+    if(!item){
+
+        alert("لم يتم العثور على الصنف.");
+
+        return;
+
+    }
+
+
+    item.name = name;
+    item.description = description;
+    item.quantity = quantity;
+    item.unit = unit;
+    item.price = price;
+    item.total = quantity * price;
+
+
+    saveQuotations();
+
+    displayItems();
+
+    clearItemForm();
+
+
+    alert("تم تعديل الصنف وحفظه بنجاح.");
+
+}
+
+
+
+function cancelItemEdit(){
+
+    clearItemForm();
+
+}
+
+
+
+function displayItems(){
+
+    if(selectedQuotationId === null){
+        return;
+    }
+
+
+    let quotation =
+        quotations.find(function(item){
+
+            return item.id ===
+                selectedQuotationId;
+
+        });
+
+
+    if(!quotation){
+        return;
+    }
+
+
+    if(!quotation.items){
+        quotation.items = [];
+    }
+
+
+    let tableBody =
+        document.getElementById(
+            "itemsTableBody"
+        );
+
+
+    tableBody.innerHTML = "";
+
+
+    quotation.items.forEach(
+        function(item,index){
+
+            let calculatedTotal =
+                Number(item.quantity) *
+                Number(item.price);
+
+
+            item.total =
+                calculatedTotal;
+
+
+            let row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+                    ${escapeHtml(item.name)}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        item.description || "-"
+                    )}
+                </td>
+
+                <td>
+                    ${item.quantity}
+                </td>
+
+                <td>
+                    ${escapeHtml(item.unit)}
+                </td>
+
+                <td>
+                    ${formatNumber(item.price)}
+                </td>
+
+                <td class="item-total">
+                    ${formatNumber(calculatedTotal)}
+                </td>
+
+                <td>
+
+                    <div
+                        style="
+                            display:flex;
+                            gap:6px;
+                            flex-wrap:wrap;
+                        ">
+
+                        <button
+                            class="item-edit-btn"
+                            onclick="editItem(
+                                ${item.id}
+                            )">
+
+                            تعديل
+
+                        </button>
+
+                        <button
+                            class="remove-item-btn"
+                            onclick="deleteItem(
+                                ${item.id}
+                            )">
+
+                            حذف
+
+                        </button>
+
+                    </div>
+
+                </td>
+
+            `;
+
+
+            tableBody.appendChild(row);
+
+        }
+    );
+
+
+    calculateTotals();
+
+}
+
+
+
+function calculateTotals(){
+
+    if(selectedQuotationId === null){
+        return;
+    }
+
+
+    let quotation =
+        quotations.find(function(item){
+
+            return item.id ===
+                selectedQuotationId;
+
+        });
+
+
+    if(!quotation){
+        return;
+    }
+
+
+    let subtotal = 0;
+
+
+    if(quotation.items){
+
+        quotation.items.forEach(
+            function(item){
+
+                subtotal +=
+                    Number(item.quantity) *
+                    Number(item.price);
+
+            }
+        );
+
+    }
+
+
+    let discountType =
+        document.getElementById(
+            "discountType"
+        ).value;
+
+
+    let discountValue =
+        parseFloat(
+            document.getElementById(
+                "discountValue"
+            ).value
+        ) || 0;
+
+
+    let taxRate =
+        parseFloat(
+            document.getElementById(
+                "taxRate"
+            ).value
+        ) || 0;
+
+
+    if(discountValue < 0){
+        discountValue = 0;
+    }
+
+
+    if(taxRate < 0){
+        taxRate = 0;
+    }
+
+
+    if(taxRate > 100){
+
+        taxRate = 100;
+
+        document.getElementById(
+            "taxRate"
+        ).value = 100;
+
+    }
+
+
+    let discountAmount = 0;
+
+
+    if(discountType === "percent"){
+
+        if(discountValue > 100){
+
+            discountValue = 100;
+
+            document.getElementById(
+                "discountValue"
+            ).value = 100;
+
+        }
+
+
+        discountAmount =
+            subtotal *
+            discountValue /
+            100;
+
+    }else{
+
+        discountAmount =
+            discountValue;
+
+
+        if(discountAmount > subtotal){
+
+            discountAmount =
+                subtotal;
+
+            document.getElementById(
+                "discountValue"
+            ).value =
+                subtotal;
+
+        }
+
+    }
+
+
+    let afterDiscount =
+        subtotal -
+        discountAmount;
+
+
+    let taxAmount =
+        afterDiscount *
+        taxRate /
+        100;
+
+
+    let finalTotal =
+        afterDiscount +
+        taxAmount;
+
+
+    quotation.subtotal =
+        subtotal;
+
+    quotation.discountType =
+        discountType;
+
+    quotation.discountValue =
+        discountValue;
+
+    quotation.discountAmount =
+        discountAmount;
+
+    quotation.afterDiscount =
+        afterDiscount;
+
+    quotation.taxRate =
+        taxRate;
+
+    quotation.taxAmount =
+        taxAmount;
+
+    quotation.finalTotal =
+        finalTotal;
+
+
+    document.getElementById(
+        "itemsSubtotal"
+    ).textContent =
+
+        formatNumber(subtotal) +
+        " " +
+        getCurrencyName(
+            quotation.currency
+        );
+
+
+    document.getElementById(
+        "discountAmount"
+    ).textContent =
+
+        formatNumber(discountAmount) +
+        " " +
+        getCurrencyName(
+            quotation.currency
+        );
+
+
+    document.getElementById(
+        "afterDiscount"
+    ).textContent =
+
+        formatNumber(afterDiscount) +
+        " " +
+        getCurrencyName(
+            quotation.currency
+        );
+
+
+    document.getElementById(
+        "taxAmount"
+    ).textContent =
+
+        formatNumber(taxAmount) +
+        " " +
+        getCurrencyName(
+            quotation.currency
+        );
+
+
+    document.getElementById(
+        "finalTotal"
+    ).textContent =
+
+        formatNumber(finalTotal) +
+        " " +
+        getCurrencyName(
+            quotation.currency
+        );
+
+
+    saveQuotations();
+
+}
+
+
+
+function deleteItem(itemId){
+
+    if(selectedQuotationId === null){
+        return;
+    }
+
+
+    let quotation =
+        quotations.find(function(item){
+
+            return item.id ===
+                selectedQuotationId;
+
+        });
+
+
+    if(!quotation){
+        return;
+    }
+
+
+    let answer =
+        confirm(
+            "هل تريد حذف هذا الصنف؟"
+        );
+
+
+    if(!answer){
+        return;
+    }
+
+
+    quotation.items =
+        quotation.items.filter(
+            function(item){
+
+                return item.id !== itemId;
+
+            }
+        );
+
+
+    if(editingItemId === itemId){
+        clearItemForm();
+    }
+
+
+    saveQuotations();
+
+    displayItems();
+
+}
+
+
+
+function saveQuotations(){
+
+    localStorage.setItem(
+        "alshamiQuotations",
+        JSON.stringify(quotations)
+    );
+
+}
+
+
+
+function formatNumber(number){
+
+    return Number(number)
+        .toLocaleString(
+            "en-US",
+            {
+                minimumFractionDigits:0,
+                maximumFractionDigits:2
+            }
+        );
+
+}
+
+
+
+function escapeHtml(text){
+
+    let div =
+        document.createElement("div");
+
+    div.textContent =
+        text == null ? "" : text;
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================
+   المعاينة
+========================= */
+
+function openPreview(id){
+
+    let quotation =
+        quotations.find(function(item){
+
+            return item.id === id;
+
+        });
+
+
+    if(!quotation){
+
+        alert("لم يتم العثور على عرض السعر.");
+
+        return;
+
+    }
+
+
+    if(!quotation.items){
+        quotation.items = [];
+    }
+
+
+    /*
+       إعادة حساب الإجماليات قبل المعاينة
+       دون الحاجة لفتح بطاقة الأصناف
+    */
+
+    let subtotal = 0;
+
+
+    quotation.items.forEach(function(item){
+
+        item.total =
+            Number(item.quantity) *
+            Number(item.price);
+
+        subtotal +=
+            item.total;
+
+    });
+
+
+    let discountType =
+        quotation.discountType || "amount";
+
+
+    let discountValue =
+        Number(quotation.discountValue) || 0;
+
+
+    let taxRate =
+        Number(quotation.taxRate);
+
+
+    if(isNaN(taxRate)){
+        taxRate = 14;
+    }
+
+
+    let discountAmount = 0;
+
+
+    if(discountType === "percent"){
+
+        if(discountValue > 100){
+            discountValue = 100;
+        }
+
+        discountAmount =
+            subtotal *
+            discountValue /
+            100;
+
+    }else{
+
+        if(discountValue < 0){
+            discountValue = 0;
+        }
+
+        discountAmount =
+            Math.min(
+                discountValue,
+                subtotal
+            );
+
+    }
+
+
+    let afterDiscount =
+        subtotal -
+        discountAmount;
+
+
+    let taxAmount =
+        afterDiscount *
+        taxRate /
+        100;
+
+
+    let finalTotal =
+        afterDiscount +
+        taxAmount;
+
+
+    quotation.subtotal =
+        subtotal;
+
+    quotation.discountValue =
+        discountValue;
+
+    quotation.discountAmount =
+        discountAmount;
+
+    quotation.afterDiscount =
+        afterDiscount;
+
+    quotation.taxRate =
+        taxRate;
+
+    quotation.taxAmount =
+        taxAmount;
+
+    quotation.finalTotal =
+        finalTotal;
+
+
+    saveQuotations();
+
+
+    let customerName =
+        getCustomerName(
+            quotation.customerId
+        );
+
+
+    let projectName =
+        getProjectName(
+            quotation.projectId
+        );
+
+
+    let currencyName =
+        getCurrencyName(
+            quotation.currency
+        );
+
+
+    let itemsHtml = "";
+
+
+    if(quotation.items.length === 0){
+
+        itemsHtml = `
+
+            <tr>
+
+                <td
+                    colspan="7"
+                    style="text-align:center">
+
+                    لا توجد أصناف في هذا العرض
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }else{
+
+        quotation.items.forEach(
+            function(item,index){
+
+                itemsHtml += `
+
+                    <tr>
+
+                        <td class="center">
+                            ${index + 1}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(item.name)}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                item.description || "-"
+                            )}
+                        </td>
+
+                        <td class="center">
+                            ${item.quantity}
+                        </td>
+
+                        <td class="center">
+                            ${escapeHtml(item.unit)}
+                        </td>
+
+                        <td class="center">
+                            ${formatNumber(item.price)}
+                        </td>
+
+                        <td class="center">
+                            ${formatNumber(item.total)}
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+        );
+
+    }
+
+
+    let discountLabel =
+        discountType === "percent"
+        ? "الخصم (" +
+          discountValue +
+          "%)"
+        : "الخصم";
+
+
+    let notes =
+        quotation.notes ||
+        "لا توجد ملاحظات.";
+
+
+    document.getElementById(
+        "previewPaper"
+    ).innerHTML = `
+
+        <div class="print-header">
+
+            <div class="company-info">
+
+                <h1>
+                    شركة الشامي
+                </h1>
+
+                <h2>
+                    ALSHAMI System Designer
+                </h2>
+
+                <p>
+
+                    العنوان:
+                    حمص - سوريا | دمياط - مصر
+
+                    <br>
+
+                    الهاتف:
+                    01275834789
+
+                    <br>
+
+                    البريد الإلكتروني:
+                    alshame-26@hotmail.com
+
+                </p>
+
+            </div>
+
+
+            <div
+                style="
+                    text-align:center;
+                    padding-top:10px;
+                ">
+
+                <div
+                    style="
+                        font-size:42px;
+                        font-weight:bold;
+                        color:#2563eb;
+                    ">
+
+                    ALSHAMI
+
+                </div>
+
+                <div
+                    style="
+                        font-size:12px;
+                        color:#64748b;
+                    ">
+
+                    System Designer
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="quote-title">
+
+            <h2>
+                عرض سعر
+            </h2>
+
+            <p>
+                QUOTATION
+            </p>
+
+        </div>
+
+
+        <div class="quote-meta">
+
+            <div class="meta-box">
+
+                <strong>
+                    رقم العرض:
+                </strong>
+
+                ${escapeHtml(
+                    quotation.quotationNumber || "-"
+                )}
+
+            </div>
+
+
+            <div class="meta-box">
+
+                <strong>
+                    التاريخ:
+                </strong>
+
+                ${escapeHtml(
+                    quotation.date || "-"
+                )}
+
+            </div>
+
+
+            <div class="meta-box">
+
+                <strong>
+                    العميل:
+                </strong>
+
+                ${escapeHtml(customerName)}
+
+            </div>
+
+
+            <div class="meta-box">
+
+                <strong>
+                    المشروع:
+                </strong>
+
+                ${escapeHtml(projectName)}
+
+            </div>
+
+
+            <div class="meta-box">
+
+                <strong>
+                    العملة:
+                </strong>
+
+                ${escapeHtml(currencyName)}
+
+            </div>
+
+
+            <div class="meta-box">
+
+                <strong>
+                    الحالة:
+                </strong>
+
+                ${escapeHtml(
+                    quotation.status || "-"
+                )}
+
+            </div>
+
+        </div>
+
+
+        <table class="preview-items">
+
+            <thead>
+
+                <tr>
+
+                    <th class="center">
+                        #
+                    </th>
+
+                    <th>
+                        الصنف
+                    </th>
+
+                    <th>
+                        الوصف
+                    </th>
+
+                    <th class="center">
+                        الكمية
+                    </th>
+
+                    <th class="center">
+                        الوحدة
+                    </th>
+
+                    <th class="center">
+                        سعر الوحدة
+                    </th>
+
+                    <th class="center">
+                        الإجمالي
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                ${itemsHtml}
+
+            </tbody>
+
+        </table>
+
+
+        <table class="preview-totals">
+
+            <tr>
+
+                <td>
+                    الإجمالي قبل الخصم
+                </td>
+
+                <td>
+                    ${formatNumber(subtotal)}
+                    ${currencyName}
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td>
+                    ${discountLabel}
+                </td>
+
+                <td>
+                    ${formatNumber(discountAmount)}
+                    ${currencyName}
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td>
+                    الإجمالي بعد الخصم
+                </td>
+
+                <td>
+                    ${formatNumber(afterDiscount)}
+                    ${currencyName}
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td>
+                    الضريبة (${taxRate}%)
+                </td>
+
+                <td>
+                    ${formatNumber(taxAmount)}
+                    ${currencyName}
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td class="preview-final">
+                    الإجمالي النهائي
+                </td>
+
+                <td class="preview-final">
+                    ${formatNumber(finalTotal)}
+                    ${currencyName}
+                </td>
+
+            </tr>
+
+        </table>
+
+
+        <div class="preview-notes">
+
+            <h3>
+                ملاحظات العرض
+            </h3>
+
+            <p>
+                ${escapeHtml(notes)}
+            </p>
+
+        </div>
+
+
+        <div class="preview-terms">
+
+            <h3>
+                شروط وأحكام العرض
+            </h3>
+
+            <ol>
+
+                <li>
+                    الأسعار الموضحة في هذا العرض حسب البيانات والمواصفات المذكورة أعلاه.
+                </li>
+
+                <li>
+                    يتم تنفيذ الأعمال حسب الاتفاق بين الطرفين.
+                </li>
+
+                <li>
+                    أي أعمال أو أصناف إضافية غير مذكورة في العرض يتم احتسابها بشكل منفصل.
+                </li>
+
+                <li>
+                    صلاحية العرض حسب الاتفاق مع العميل.
+                </li>
+
+            </ol>
+
+        </div>
+
+
+        <div class="signature-area">
+
+            <div class="signature-box">
+
+                توقيع العميل
+
+            </div>
+
+            <div class="signature-box">
+
+                شركة الشامي
+
+            </div>
+
+        </div>
+
+
+        <div class="preview-footer">
+
+            شركة الشامي | ALSHAMI System Designer
+
+            |
+            حمص - سوريا | دمياط - مصر
+
+            |
+            01275834789
+
+            |
+            alshame-26@hotmail.com
+
+        </div>
+
+    `;
+
+
+    document.getElementById(
+        "previewOverlay"
+    ).style.display =
+        "block";
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+
+function closePreview(){
+
+    document.getElementById(
+        "previewOverlay"
+    ).style.display =
+        "none";
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+
+function printQuotation(){
+
+    window.print();
+
+}
+
+
+/* إغلاق المعاينة عند الضغط خارج الورقة */
+
+document.getElementById(
+    "previewOverlay"
+).addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target === this
+        ){
+
+            closePreview();
+
+        }
+
+    }
+);
+
+
+/* ESC لإغلاق المعاينة */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Escape"
+        ){
+
+            let overlay =
+                document.getElementById(
+                    "previewOverlay"
+                );
+
+            if(
+                overlay.style.display ===
+                "block"
+            ){
+
+                closePreview();
+
+            }
+
+        }
+
+    }
+);
+
+
+loadCustomers();
+
+displayQuotations();
+
+
+</script></body>
+</html>

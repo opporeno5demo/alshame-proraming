@@ -1,0 +1,2000 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>المشاريع - ALSHAMI System Designer</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Tahoma, sans-serif;
+        }
+
+        body {
+            background: #f1f5f9;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            background: #0f172a;
+            color: white;
+            padding: 18px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        .back-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .back-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .container {
+            padding: 25px;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .page-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .page-title h1 {
+            font-size: 28px;
+            color: #0f172a;
+        }
+
+        .page-title p {
+            color: #64748b;
+            margin-top: 5px;
+        }
+
+        .add-btn {
+            background: #16a34a;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .add-btn:hover {
+            background: #15803d;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .stat-card h3 {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #0f172a;
+        }
+
+        .form-card {
+            display: none;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .form-card h2 {
+            color: #0f172a;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #334155;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #2563eb;
+        }
+
+        .form-group textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .form-buttons {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .save-btn {
+            background: #16a34a;
+            color: white;
+            border: none;
+            padding: 11px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cancel-btn {
+            background: #64748b;
+            color: white;
+            border: none;
+            padding: 11px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .search-box {
+            background: white;
+            padding: 18px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: #2563eb;
+        }
+
+        .table-card {
+            background: white;
+            border-radius: 12px;
+            overflow-x: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1100px;
+        }
+
+        th {
+            background: #e2e8f0;
+            color: #0f172a;
+            padding: 15px;
+            text-align: right;
+            font-size: 14px;
+        }
+
+        td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .project-number {
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .status.new {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .status.progress {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status.completed {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status.stopped {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .actions {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .details-btn,
+        .edit-btn,
+        .delete-btn {
+            border: none;
+            padding: 7px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: white;
+            font-size: 12px;
+        }
+
+        .details-btn {
+            background: #7c3aed;
+        }
+
+        .edit-btn {
+            background: #2563eb;
+        }
+
+        .delete-btn {
+            background: #dc2626;
+        }
+
+        .details-btn:hover {
+            background: #6d28d9;
+        }
+
+        .edit-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .delete-btn:hover {
+            background: #b91c1c;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15,23,42,0.65);
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 700px;
+            margin: 50px auto;
+            border-radius: 14px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            color: #0f172a;
+            font-size: 22px;
+        }
+
+        .close-btn {
+            border: none;
+            background: #e2e8f0;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            color: #334155;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .detail-item {
+            background: #f8fafc;
+            padding: 14px;
+            border-radius: 8px;
+        }
+
+        .detail-item.full {
+            grid-column: 1 / -1;
+        }
+
+        .detail-label {
+            color: #64748b;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .detail-value {
+            color: #0f172a;
+            font-size: 15px;
+            font-weight: bold;
+            word-break: break-word;
+        }
+
+        @media (max-width: 800px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .topbar {
+                padding: 15px;
+            }
+
+            .logo {
+                font-size: 17px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .page-title h1 {
+                font-size: 23px;
+            }
+
+            .add-btn {
+                width: 100%;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .form-buttons {
+                flex-direction: column;
+            }
+
+            .save-btn,
+            .cancel-btn {
+                width: 100%;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-item.full {
+                grid-column: auto;
+            }
+
+            .modal {
+                padding: 10px;
+            }
+
+            .modal-content {
+                margin: 20px auto;
+                padding: 18px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <div class="topbar">
+
+        <div class="logo">
+
+            ALSHAMI
+
+            <span>
+                System Designer
+            </span>
+
+        </div>
+
+        <button
+            class="back-btn"
+            onclick="goDashboard()"
+        >
+            لوحة التحكم
+        </button>
+
+    </div>
+
+
+    <div class="container">
+
+
+        <div class="page-title">
+
+            <div>
+
+                <h1>
+                    إدارة المشاريع
+                </h1>
+
+                <p>
+                    إنشاء ومتابعة مشاريع العملاء
+                </p>
+
+            </div>
+
+            <button
+                class="add-btn"
+                onclick="showProjectForm()"
+            >
+                + إضافة مشروع جديد
+            </button>
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <h3>
+                    إجمالي المشاريع
+                </h3>
+
+                <div
+                    class="number"
+                    id="totalProjects"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>
+                    مشاريع جديدة
+                </h3>
+
+                <div
+                    class="number"
+                    id="newProjects"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>
+                    قيد التنفيذ
+                </h3>
+
+                <div
+                    class="number"
+                    id="progressProjects"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>
+                    مكتملة
+                </h3>
+
+                <div
+                    class="number"
+                    id="completedProjects"
+                >
+                    0
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="form-card"
+            id="projectForm"
+        >
+
+            <h2 id="formTitle">
+                إضافة مشروع جديد
+            </h2>
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        اسم المشروع *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="projectName"
+                        placeholder="مثال: تركيب كاميرات الفندق"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        العميل *
+                    </label>
+
+                    <select id="projectCustomer">
+
+                        <option value="">
+                            اختر العميل
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        نوع المشروع
+                    </label>
+
+                    <select id="projectType">
+
+                        <option value="CCTV">
+                            CCTV - كاميرات
+                        </option>
+
+                        <option value="Network">
+                            Network - شبكات
+                        </option>
+
+                        <option value="WiFi">
+                            WiFi
+                        </option>
+
+                        <option value="Fire Alarm">
+                            Fire Alarm - إنذار حريق
+                        </option>
+
+                        <option value="IPTV">
+                            IPTV
+                        </option>
+
+                        <option value="تيار خفيف">
+                            تيار خفيف
+                        </option>
+
+                        <option value="متعدد الأنظمة">
+                            متعدد الأنظمة
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        حالة المشروع
+                    </label>
+
+                    <select id="projectStatus">
+
+                        <option value="جديد">
+                            جديد
+                        </option>
+
+                        <option value="قيد التنفيذ">
+                            قيد التنفيذ
+                        </option>
+
+                        <option value="مكتمل">
+                            مكتمل
+                        </option>
+
+                        <option value="متوقف">
+                            متوقف
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        تاريخ البداية
+                    </label>
+
+                    <input
+                        type="date"
+                        id="startDate"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        تاريخ التسليم
+                    </label>
+
+                    <input
+                        type="date"
+                        id="endDate"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        قيمة المشروع
+                    </label>
+
+                    <input
+                        type="number"
+                        id="projectValue"
+                        placeholder="0"
+                        min="0"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        العملة
+                    </label>
+
+                    <select id="currency">
+
+                        <option value="جنيه مصري">
+                            جنيه مصري
+                        </option>
+
+                        <option value="دولار أمريكي">
+                            دولار أمريكي
+                        </option>
+
+                        <option value="ليرة سورية">
+                            ليرة سورية
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>
+                        ملاحظات
+                    </label>
+
+                    <textarea
+                        id="projectNotes"
+                        placeholder="اكتب ملاحظات المشروع..."
+                    ></textarea>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="form-buttons">
+
+                <button
+                    class="save-btn"
+                    id="saveButton"
+                    onclick="saveProject()"
+                >
+                    حفظ المشروع
+                </button>
+
+                <button
+                    class="cancel-btn"
+                    onclick="cancelForm()"
+                >
+                    إلغاء
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="ابحث عن رقم المشروع أو اسم المشروع أو العميل..."
+                onkeyup="searchProjects()"
+            >
+
+        </div>
+
+
+        <div class="table-card">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            رقم المشروع
+                        </th>
+
+                        <th>
+                            اسم المشروع
+                        </th>
+
+                        <th>
+                            العميل
+                        </th>
+
+                        <th>
+                            النوع
+                        </th>
+
+                        <th>
+                            الحالة
+                        </th>
+
+                        <th>
+                            القيمة
+                        </th>
+
+                        <th>
+                            الإجراءات
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="projectsTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="modal"
+        id="detailsModal"
+        onclick="closeModalOutside(event)"
+    >
+
+        <div
+            class="modal-content"
+            onclick="event.stopPropagation()"
+        >
+
+            <div class="modal-header">
+
+                <h2>
+                    تفاصيل المشروع
+                </h2>
+
+                <button
+                    class="close-btn"
+                    onclick="closeDetails()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <div
+                class="details-grid"
+                id="projectDetails"
+            >
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+
+        let customers = JSON.parse(
+            localStorage.getItem("alshamiCustomers")
+        ) || [];
+
+
+        let projects = JSON.parse(
+            localStorage.getItem("alshamiProjects")
+        ) || [];
+
+
+        let editingProjectId = null;
+
+
+        function goDashboard() {
+
+            window.location.href = "dashboard.html";
+
+        }
+
+
+        function loadCustomers() {
+
+            let select =
+                document.getElementById(
+                    "projectCustomer"
+                );
+
+
+            select.innerHTML = `
+                <option value="">
+                    اختر العميل
+                </option>
+            `;
+
+
+            customers.forEach(function(customer) {
+
+                let option =
+                    document.createElement("option");
+
+
+                option.value = customer.id;
+
+
+                option.textContent =
+                    (customer.customerNumber || "") +
+                    " - " +
+                    customer.name;
+
+
+                select.appendChild(option);
+
+            });
+
+        }
+
+
+        function getNextProjectNumber() {
+
+            let highestNumber = 0;
+
+
+            projects.forEach(function(project) {
+
+                if (!project.projectNumber) {
+                    return;
+                }
+
+
+                let number =
+                    parseInt(
+                        project.projectNumber.replace(
+                            "PRJ-",
+                            ""
+                        )
+                    );
+
+
+                if (
+                    !isNaN(number) &&
+                    number > highestNumber
+                ) {
+                    highestNumber = number;
+                }
+
+            });
+
+
+            return "PRJ-" +
+                String(highestNumber + 1)
+                    .padStart(4, "0");
+
+        }
+
+
+        function showProjectForm() {
+
+            editingProjectId = null;
+
+
+            document.getElementById(
+                "formTitle"
+            ).textContent =
+                "إضافة مشروع جديد";
+
+
+            document.getElementById(
+                "saveButton"
+            ).textContent =
+                "حفظ المشروع";
+
+
+            clearForm();
+
+
+            loadCustomers();
+
+
+            document.getElementById(
+                "projectForm"
+            ).style.display =
+                "block";
+
+
+            document.getElementById(
+                "projectForm"
+            ).scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+
+
+        function cancelForm() {
+
+            editingProjectId = null;
+
+
+            clearForm();
+
+
+            document.getElementById(
+                "projectForm"
+            ).style.display =
+                "none";
+
+
+            document.getElementById(
+                "formTitle"
+            ).textContent =
+                "إضافة مشروع جديد";
+
+
+            document.getElementById(
+                "saveButton"
+            ).textContent =
+                "حفظ المشروع";
+
+        }
+
+
+        function saveProject() {
+
+            let name =
+                document.getElementById(
+                    "projectName"
+                ).value.trim();
+
+
+            let customerId =
+                document.getElementById(
+                    "projectCustomer"
+                ).value;
+
+
+            let type =
+                document.getElementById(
+                    "projectType"
+                ).value;
+
+
+            let status =
+                document.getElementById(
+                    "projectStatus"
+                ).value;
+
+
+            let startDate =
+                document.getElementById(
+                    "startDate"
+                ).value;
+
+
+            let endDate =
+                document.getElementById(
+                    "endDate"
+                ).value;
+
+
+            let value =
+                document.getElementById(
+                    "projectValue"
+                ).value;
+
+
+            let currency =
+                document.getElementById(
+                    "currency"
+                ).value;
+
+
+            let notes =
+                document.getElementById(
+                    "projectNotes"
+                ).value.trim();
+
+
+            if (name === "") {
+
+                alert(
+                    "من فضلك اكتب اسم المشروع."
+                );
+
+                return;
+
+            }
+
+
+            if (customerId === "") {
+
+                alert(
+                    "من فضلك اختر العميل."
+                );
+
+                return;
+
+            }
+
+
+            let customer =
+                customers.find(function(customer) {
+
+                    return String(customer.id) ===
+                        String(customerId);
+
+                });
+
+
+            if (!customer) {
+
+                alert(
+                    "العميل غير موجود."
+                );
+
+                return;
+
+            }
+
+
+            if (editingProjectId !== null) {
+
+                let project =
+                    projects.find(function(project) {
+
+                        return project.id ===
+                            editingProjectId;
+
+                    });
+
+
+                if (!project) {
+
+                    alert(
+                        "لم يتم العثور على المشروع."
+                    );
+
+                    return;
+
+                }
+
+
+                project.name = name;
+
+                project.customerId =
+                    customer.id;
+
+                project.customerNumber =
+                    customer.customerNumber;
+
+                project.customerName =
+                    customer.name;
+
+                project.type = type;
+
+                project.status = status;
+
+                project.startDate = startDate;
+
+                project.endDate = endDate;
+
+                project.value = value;
+
+                project.currency = currency;
+
+                project.notes = notes;
+
+
+                alert(
+                    "تم تعديل المشروع بنجاح."
+                );
+
+            } else {
+
+                let project = {
+
+                    id: Date.now(),
+
+                    projectNumber:
+                        getNextProjectNumber(),
+
+                    name: name,
+
+                    customerId:
+                        customer.id,
+
+                    customerNumber:
+                        customer.customerNumber,
+
+                    customerName:
+                        customer.name,
+
+                    type: type,
+
+                    status: status,
+
+                    startDate: startDate,
+
+                    endDate: endDate,
+
+                    value: value,
+
+                    currency: currency,
+
+                    notes: notes
+
+                };
+
+
+                projects.push(project);
+
+
+                alert(
+                    "تم حفظ المشروع بنجاح."
+                );
+
+            }
+
+
+            localStorage.setItem(
+                "alshamiProjects",
+                JSON.stringify(projects)
+            );
+
+
+            displayProjects();
+
+            cancelForm();
+
+        }
+
+
+        function displayProjects() {
+
+            let table =
+                document.getElementById(
+                    "projectsTable"
+                );
+
+
+            table.innerHTML = "";
+
+
+            if (projects.length === 0) {
+
+                table.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="7"
+                            style="text-align:center; padding:30px;"
+                        >
+
+                            لا يوجد مشاريع حتى الآن
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+
+                updateStatistics();
+
+                return;
+
+            }
+
+
+            projects.forEach(function(project) {
+
+                let row =
+                    document.createElement("tr");
+
+
+                let statusClass =
+                    getStatusClass(
+                        project.status
+                    );
+
+
+                row.innerHTML = `
+
+                    <td>
+
+                        <span class="project-number">
+
+                            ${project.projectNumber}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+                        ${project.name}
+                    </td>
+
+                    <td>
+                        ${project.customerName || "-"}
+                    </td>
+
+                    <td>
+                        ${project.type || "-"}
+                    </td>
+
+                    <td>
+
+                        <span
+                            class="status ${statusClass}"
+                        >
+
+                            ${project.status}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        ${
+                            project.value
+                            ?
+                            Number(
+                                project.value
+                            ).toLocaleString("ar-EG")
+                            + " "
+                            + project.currency
+                            :
+                            "-"
+                        }
+
+                    </td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="details-btn"
+                                onclick="showDetails(${project.id})"
+                            >
+                                تفاصيل
+                            </button>
+
+                            <button
+                                class="edit-btn"
+                                onclick="editProject(${project.id})"
+                            >
+                                تعديل
+                            </button>
+
+                            <button
+                                class="delete-btn"
+                                onclick="deleteProject(${project.id})"
+                            >
+                                حذف
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                `;
+
+
+                table.appendChild(row);
+
+            });
+
+
+            updateStatistics();
+
+        }
+
+
+        function getStatusClass(status) {
+
+            if (status === "جديد") {
+                return "new";
+            }
+
+            if (status === "قيد التنفيذ") {
+                return "progress";
+            }
+
+            if (status === "مكتمل") {
+                return "completed";
+            }
+
+            if (status === "متوقف") {
+                return "stopped";
+            }
+
+            return "";
+
+        }
+
+
+        function updateStatistics() {
+
+            let total =
+                projects.length;
+
+
+            let newProjects =
+                projects.filter(function(project) {
+
+                    return project.status ===
+                        "جديد";
+
+                }).length;
+
+
+            let progress =
+                projects.filter(function(project) {
+
+                    return project.status ===
+                        "قيد التنفيذ";
+
+                }).length;
+
+
+            let completed =
+                projects.filter(function(project) {
+
+                    return project.status ===
+                        "مكتمل";
+
+                }).length;
+
+
+            document.getElementById(
+                "totalProjects"
+            ).textContent = total;
+
+
+            document.getElementById(
+                "newProjects"
+            ).textContent = newProjects;
+
+
+            document.getElementById(
+                "progressProjects"
+            ).textContent = progress;
+
+
+            document.getElementById(
+                "completedProjects"
+            ).textContent = completed;
+
+        }
+
+
+        function editProject(id) {
+
+            let project =
+                projects.find(function(project) {
+
+                    return project.id === id;
+
+                });
+
+
+            if (!project) {
+
+                alert(
+                    "لم يتم العثور على المشروع."
+                );
+
+                return;
+
+            }
+
+
+            editingProjectId = id;
+
+
+            loadCustomers();
+
+
+            document.getElementById(
+                "formTitle"
+            ).textContent =
+                "تعديل بيانات المشروع";
+
+
+            document.getElementById(
+                "saveButton"
+            ).textContent =
+                "حفظ التعديل";
+
+
+            document.getElementById(
+                "projectName"
+            ).value =
+                project.name || "";
+
+
+            document.getElementById(
+                "projectCustomer"
+            ).value =
+                project.customerId || "";
+
+
+            document.getElementById(
+                "projectType"
+            ).value =
+                project.type || "CCTV";
+
+
+            document.getElementById(
+                "projectStatus"
+            ).value =
+                project.status || "جديد";
+
+
+            document.getElementById(
+                "startDate"
+            ).value =
+                project.startDate || "";
+
+
+            document.getElementById(
+                "endDate"
+            ).value =
+                project.endDate || "";
+
+
+            document.getElementById(
+                "projectValue"
+            ).value =
+                project.value || "";
+
+
+            document.getElementById(
+                "currency"
+            ).value =
+                project.currency ||
+                "جنيه مصري";
+
+
+            document.getElementById(
+                "projectNotes"
+            ).value =
+                project.notes || "";
+
+
+            document.getElementById(
+                "projectForm"
+            ).style.display =
+                "block";
+
+
+            document.getElementById(
+                "projectForm"
+            ).scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+
+
+        function showDetails(id) {
+
+            let project =
+                projects.find(function(project) {
+
+                    return project.id === id;
+
+                });
+
+
+            if (!project) {
+
+                alert(
+                    "لم يتم العثور على المشروع."
+                );
+
+                return;
+
+            }
+
+
+            let details =
+                document.getElementById(
+                    "projectDetails"
+                );
+
+
+            details.innerHTML = `
+
+                <div class="detail-item">
+
+                    <div class="detail-label">
+                        رقم المشروع
+                    </div>
+
+                    <div class="detail-value">
+                        ${project.projectNumber}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <div class="detail-label">
+                        اسم المشروع
+                    </div>
+
+                    <div class="detail-value">
+                        ${project.name}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <div class="detail-label">
+                        رقم العميل
+                    </div>
+
+                    <div class="detail-value">
+                        ${project.customerNumber || "-"}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <div class="detail-label">
+                        العميل
+                    </div>
+
+                    <div class="detail-value">
+                        ${project.customerName || "-"}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <div class="detail-label">
+                        نوع المشروع
+                    </div>
+
+                    <div class="detail-value">
+                        ${project.type || "-"}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <div class="detail-label">
+                        الحالة
+                    </div>
+
+                    <div class="detail-value">
+                        ${project.status || "-"}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <div class="detail-label">
+                        تاريخ البداية
+                    </div>
+
+                    <div class="detail-value">
+                        ${project.startDate || "-"}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <div class="detail-label">
+                        تاريخ التسليم
+                    </div>
+
+                    <div class="detail-value">
+                        ${project.endDate || "-"}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <div class="detail-label">
+                        قيمة المشروع
+                    </div>
+
+                    <div class="detail-value">
+
+                        ${
+                            project.value
+                            ?
+                            Number(
+                                project.value
+                            ).toLocaleString("ar-EG")
+                            + " "
+                            + project.currency
+                            :
+                            "-"
+                        }
+
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item full">
+
+                    <div class="detail-label">
+                        الملاحظات
+                    </div>
+
+                    <div class="detail-value">
+                        ${project.notes || "-"}
+                    </div>
+
+                </div>
+
+            `;
+
+
+            document.getElementById(
+                "detailsModal"
+            ).style.display =
+                "block";
+
+        }
+
+
+        function closeDetails() {
+
+            document.getElementById(
+                "detailsModal"
+            ).style.display =
+                "none";
+
+        }
+
+
+        function closeModalOutside(event) {
+
+            if (
+                event.target.id ===
+                "detailsModal"
+            ) {
+
+                closeDetails();
+
+            }
+
+        }
+
+
+        function deleteProject(id) {
+
+            let project =
+                projects.find(function(project) {
+
+                    return project.id === id;
+
+                });
+
+
+            if (!project) {
+                return;
+            }
+
+
+            let confirmDelete =
+                confirm(
+
+                    "هل أنت متأكد من حذف المشروع؟\n\n" +
+                    project.projectNumber +
+                    "\n" +
+                    project.name
+
+                );
+
+
+            if (!confirmDelete) {
+                return;
+            }
+
+
+            projects =
+                projects.filter(function(project) {
+
+                    return project.id !== id;
+
+                });
+
+
+            localStorage.setItem(
+                "alshamiProjects",
+                JSON.stringify(projects)
+            );
+
+
+            displayProjects();
+
+
+            alert(
+                "تم حذف المشروع."
+            );
+
+        }
+
+
+        function clearForm() {
+
+            document.getElementById(
+                "projectName"
+            ).value = "";
+
+
+            document.getElementById(
+                "projectCustomer"
+            ).value = "";
+
+
+            document.getElementById(
+                "projectType"
+            ).value = "CCTV";
+
+
+            document.getElementById(
+                "projectStatus"
+            ).value = "جديد";
+
+
+            document.getElementById(
+                "startDate"
+            ).value = "";
+
+
+            document.getElementById(
+                "endDate"
+            ).value = "";
+
+
+            document.getElementById(
+                "projectValue"
+            ).value = "";
+
+
+            document.getElementById(
+                "currency"
+            ).value = "جنيه مصري";
+
+
+            document.getElementById(
+                "projectNotes"
+            ).value = "";
+
+        }
+
+
+        function searchProjects() {
+
+            let input =
+                document.getElementById(
+                    "searchInput"
+                );
+
+
+            let filter =
+                input.value.toLowerCase();
+
+
+            let rows =
+                document
+                    .getElementById(
+                        "projectsTable"
+                    )
+                    .getElementsByTagName(
+                        "tr"
+                    );
+
+
+            for (
+                let i = 0;
+                i < rows.length;
+                i++
+            ) {
+
+                let text =
+                    rows[i]
+                        .textContent
+                        .toLowerCase();
+
+
+                if (text.includes(filter)) {
+
+                    rows[i].style.display = "";
+
+                } else {
+
+                    rows[i].style.display = "none";
+
+                }
+
+            }
+
+        }
+
+
+        loadCustomers();
+
+        displayProjects();
+
+    </script>
+
+</body>
+
+</html>
